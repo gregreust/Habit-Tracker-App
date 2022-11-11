@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
     'check_in_values',
+    'habit_frequency',
 ]
 
 MIDDLEWARE = [
