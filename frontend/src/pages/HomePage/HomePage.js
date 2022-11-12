@@ -1,40 +1,25 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import useAuth from "../../hooks/useAuth";
+
+import HowTo from "../HowTo/HowTo";
 
 import axios from "axios";
 
 const HomePage = () => {
-  // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
-  // The "token" value is the JWT token that you will send in the header of any request requiring authentication
-  //TODO: Add an AddCars Page to add a car for a logged in user's garage
-  const [user, token] = useAuth();
-  const [cars, setCars] = useState([]);
+  
+  // useEffect with a daily tip from the database here!!!
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setCars(response.data);
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
-    fetchCars();
-  }, [token]);
   return (
     <div className="container">
-      <h1>Home Page for {user.username}!</h1>
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
-          </p>
-        ))}
+      <button onClick={navigate=('/howto')}>Getting Started</button>
+      <button onClick={navigate=('/checkin')}>Daily Check-in</button>
+      <button onClick={navigate=('/myprogress')}>View Progress</button>
+      <button onClick={navigate=('/community')}>Community Support</button>
+      <button onClick={navigate=('/mygoals')}>My Goals</button>
+      <button onClick={navigate=('/settings')}>Settings</button>
     </div>
   );
 };

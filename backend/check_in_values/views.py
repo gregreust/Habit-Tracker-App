@@ -8,7 +8,7 @@ from .serializers import CheckInSerializer
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 #Get all data for testing purposes only 
-@api_view([GET])
+@api_view(['GET'])
 @permission_classes([AllowAny])
 def get_all_checkin_data(request):
     checkin_data = get_list_or_404(CheckInValues)
@@ -16,7 +16,7 @@ def get_all_checkin_data(request):
     return Response(serializer.data)
 
 #Getting data for one user
-@api_view([GET])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user_checkin_data(request):
     checkin_data = get_list_or_404(CheckInValues, user=request.user)
@@ -24,7 +24,7 @@ def get_user_checkin_data(request):
     return Response(serializer.data)
 
 #Creating new record from Daily Check in
-@api_view([POST])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def post_new_check_in(request):
     serializer = CheckInSerializer(data=request.data, partial=True)
