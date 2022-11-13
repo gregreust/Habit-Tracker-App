@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'check_in_values',
     'habit_frequency',
+    'habits',
 ]
 
 MIDDLEWARE = [
