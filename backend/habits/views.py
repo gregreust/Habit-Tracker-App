@@ -6,11 +6,11 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Habits
 from .serializers import HabitsSerializer
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_list_or_404, get_object_or_404
 
 User = get_user_model()
 
-#Get all data for testing purposes only 
+#Get all habits from list
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_all_habits(request):
@@ -56,6 +56,14 @@ def add_or_remove_user_habit(request, habit_id):
             this_user.habits.remove(habit)
             return Response(status=status.HTTP_200_OK)
         except:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_habit(request, habit_id):
+    habit = get_object_or_404(Habits, id=habit_id)
+    habit.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
     
