@@ -6,6 +6,14 @@ import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import HowTo from "./pages/HowTo/HowTo";
+import CheckIn1 from "./pages/CheckIn/CheckIn1";
+import MyProgress from "./pages/MyProgress/MyProgress";
+import CommunitySupport from "./pages/CommunitySupport/CommunitySupport";
+import MyGoals from "./pages/MyGoals/MyGoals";
+import MyGoals2 from "./pages/MyGoals/MyGoals2";
+import Settings from "./pages/Settings/Settings";
+
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -27,6 +35,13 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/howto" element={<HowTo/>}></Route>
+        <Route path="/checkin" element={<CheckIn1/>}></Route>
+        <Route path="/myprogress" element={<MyProgress/>}></Route>
+        <Route path="/community" element={<CommunitySupport/>}></Route>
+        <Route path="/mygoals" element={<MyGoals/>}></Route>
+        <Route path="/goals2" element={<MyGoals2/>}></Route>
+        <Route path="/settings" element={<Settings/>}></Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
