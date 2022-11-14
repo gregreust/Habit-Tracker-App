@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/auth/', include('authentication.urls')),
     path('api/checkin/', include('check_in_values.urls')),
     path('api/habitfreq/', include('habit_frequency.urls')),
+    path('api/habits/', include('habits.urls'))
 ]
