@@ -11,7 +11,7 @@ const MyGoals = () => {
     // useEffect load currently tracked habits. Catch if none exist yet
     useEffect(() => {
         fetchHabits();
-    })
+    }, [])
 
     const fetchHabits = async () => {
          try {
@@ -40,7 +40,7 @@ const MyGoals = () => {
                     )
                 })}
             </ul>
-            <Link to="/goals2" state={userHabits}><button>Add or remove a habit to track</button></Link>
+            <Link to="/goals2"><button>Add or remove a habit to track</button></Link>
 
         </div>
         

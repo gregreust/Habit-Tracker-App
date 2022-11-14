@@ -1,27 +1,29 @@
 import React, {useState, useEffect} from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
-import { InvalidTokenError } from 'jwt-decode';
 
-const MyGoals2 = () => {
+const MyGoals2 = ({setUserHabits}) => {
 
-    const preselectedHabits = useLocation();
+    const navigate = useNavigate();
     const [user, token] = useAuth();
     const [allHabits, setAllHabits] = useState([]);
-    const [checkedState, setCheckedState] = useState(
-        new Array(allHabits.length).fill(false)
-    );
+    const [checkedState, setCheckedState] = useState([]);
 
     
     useEffect (() => {
-        fetchAllHabits();
-    })
+        fetchAllHabits().then(() => {
+            // Program must wait for the habit array
+            let false_array = new Array(allHabits.length).fill(false);
+            setCheckedState(false_array);
+        })
+    }, [])
 
     const fetchAllHabits = async () => {
         try {
             let response = await axios.get('http://127.0.0.1:8000/api/habits/all/');
             setAllHabits(response.data);
+            console.log(allHabits);
         } catch (error) {
             console.log(error);
         }
@@ -42,31 +44,42 @@ const MyGoals2 = () => {
     const handleClick = (position) => {
         const updatedCheckedState = checkedState.map((item,index) => 
             index === position ? !item : item
+
         );
         setCheckedState(updatedCheckedState); 
-        updateUserHabits(position);
     }
+
+    const handleSubmit = () => {
+        for (let i=0; i<checkedState.length; i++){
+            if (checkedState[i]){
+                updateUserHabits(i+1);
+            }
+        }
+        navigate('/mygoals');
+    }
+
 
     return ( 
         <div className="my-goals-2">
             <ul className="habits-checklist">
-                {allHabits.map((habit) => {
+                {allHabits.map((habit, index) => {
                     return (
-                        <li key={habit.id}>
+                        <li key={index}>
                             <div className="habit-list-item">
                                 <input
                                     type="checkbox"
-                                    id={`custom-checkbox-${habit.id}`}
+                                    id={`custom-checkbox-${index}`}
                                     name={habit.name}
                                     value={habit.name}
-                                    checked={checkedState[habit.id]}
-                                    onChange={() => handleClick(habit.id)}/>
-                                <label htmlFor={`custom-checkbox-${habit.id}`}>{habit.name}</label>
+                                    checked={checkedState[index]}
+                                    onChange={() => handleClick(index)}/>
+                                <label htmlFor={`custom-checkbox-${index}`}>{habit.name}</label>
                             </div>
                         </li>
                     )
                 })}
             </ul>
+            <button onClick={handleSubmit}>Submit</button>
         </div>
     );
 }
