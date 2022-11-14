@@ -32,10 +32,9 @@ def get_user_habits(request):
     elif request.method == 'POST':
         serializer = HabitsSerializer(data=request.data, partial=True)
         if serializer.is_valid():
-            
-            serializer.save(user=this_user)
+            serializer.save()
             #Adding the new habit to user's habits
-            this_user.habits.add(request.data)
+            this_user.habits.add(Habits.objects.latest('id'))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -43,7 +42,8 @@ def get_user_habits(request):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def remove_user_habit(request, habit_id):
-    User.habits.remove(habit=habit_id)
+    this_user = User.objects.get(username=request.user)
+    this_user.habits.remove(habit=habit_id)
     return Response()
 
     
