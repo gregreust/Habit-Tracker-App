@@ -22,18 +22,20 @@ def get_all_habits(request):
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def get_user_habits(request):
+    this_user = User.objects.get(username=request.user)
     if request.method == 'GET':
 
         #this is a reverse m2m query copied from documentation
-        habits = get_list_or_404(Habits.objects.filter(user_id=User.id))
+        habits = get_list_or_404(Habits.objects.filter(user_id=this_user.id))
         serializer = HabitsSerializer(habits, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = HabitsSerializer(data=request.data, partial=True)
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            
+            serializer.save(user=this_user)
             #Adding the new habit to user's habits
-            User.habits.add(request.data)
+            this_user.habits.add(request.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
