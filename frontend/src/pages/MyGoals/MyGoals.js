@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import AuthContext from '../../context/AuthContext';
 import axios from 'axios';
 
 const MyGoals = () => {
 
     const [user, token] = useAuth();
-    const [userHabits, setUserHabits] = useState([]);
+    const { userHabits, setUserHabits } = useContext(AuthContext);
 
     // useEffect load currently tracked habits. Catch if none exist yet
     useEffect(() => {

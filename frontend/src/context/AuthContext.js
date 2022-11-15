@@ -25,6 +25,8 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(userToken);
   const [user, setUser] = useState(setUserObject(decodedUser));
   const [isServerError, setIsServerError] = useState(false);
+  // user's habits
+  const [userHabits, setUserHabits] = useState([]);
   const navigate = useNavigate();
 
   const registerUser = async (registerData) => {
@@ -85,6 +87,8 @@ export const AuthProvider = ({ children }) => {
     logoutUser,
     registerUser,
     isServerError,
+    userHabits,
+    setUserHabits
   };
 
   return (
