@@ -7,7 +7,8 @@ import axios from 'axios';
 const MyGoals = () => {
 
     const [user, token] = useAuth();
-    const { userHabits, setUserHabits } = useContext(AuthContext);
+    // const { userHabits, setUserHabits } = useContext(AuthContext);
+    const [userHabits, setUserHabits] = useState([]);
 
     // useEffect load currently tracked habits. Catch if none exist yet
     useEffect(() => {
@@ -41,7 +42,7 @@ const MyGoals = () => {
                     )
                 })}
             </ul>
-            <Link to="/goals2"><button>Add or remove a habit to track</button></Link>
+            <Link to="/goals2" state={userHabits}><button>Add or remove a habit to track</button></Link>
 
         </div>
         

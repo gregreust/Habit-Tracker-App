@@ -7,7 +7,7 @@ const CheckIn1 = () => {
 
     const [user, token] = useAuth();
     const [userHabits, setUserHabits] = useState([]);
-    const [isClicked, setisClicked] = useState([]);
+    const [isChecked, setisChecked] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const CheckIn1 = () => {
              }
         }
         fetchHabits();
-    })
+    }, [])
 
     const handleCheck = event => {
         //value here is the habit name str
@@ -36,30 +36,35 @@ const CheckIn1 = () => {
         let checked = event.target.checked;
         if (checked) {
             //push checked habit to list
-            setisClicked(prev => [...prev, value]);
+            setisChecked(prev => [...prev, value]);
         } else {
             //remove unchecked value 
-            setisClicked(prev => prev.filter(x => x !== value))
+            setisChecked(prev => prev.filter(x => x !== value))
         }
-        console.log(isClicked);
+        console.log(isChecked);
     }
     
     async function handleSubmit(event){
         event.preventDefault();
         for (let key in userHabits){
             let new_record = {}
-            if (isClicked.includes(userHabits[key].name)){
+            if (isChecked.includes(userHabits[key].name)){
                 new_record = {
-                    name: userHabits[key].name,
+                    habit_name: userHabits[key].name,
                     yes_or_no: true
                 }
             } else {
                 new_record = {
-                    name: userHabits[key].name,
+                    habit_name: userHabits[key].name,
                     yes_or_no: false
                 }
             }
-            await axios.post('http://127.0.0.1:8000/api/habitfreq/', new_record);
+            await axios.post('http://127.0.0.1:8000/api/habitfreq/', new_record,
+                    {
+                        headers: {
+                            Authorization: "Bearer " + token,
+                        },
+                    });
         }
         navigate('/checkin2');
     }
@@ -69,9 +74,8 @@ const CheckIn1 = () => {
             <h3>Did you do this today?</h3>
             <form onSubmit={(event) => handleSubmit(event)}>
                 {userHabits&&userHabits.map(habit =>
-                <label>{habit.name}
+                <label key={habit.id}>{habit.name}
                     <input type="checkbox" 
-                    index={habit.id}
                     value={habit.name}
                     onChange={handleCheck}
                     />
