@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import HowTo from "./pages/HowTo/HowTo";
 import CheckIn1 from "./pages/CheckIn/CheckIn1";
+import CheckIn2 from "./pages/CheckIn/CheckIn2";
 import MyProgress from "./pages/MyProgress/MyProgress";
 import CommunitySupport from "./pages/CommunitySupport/CommunitySupport";
 import MyGoals from "./pages/MyGoals/MyGoals";
@@ -37,6 +38,7 @@ function App() {
         />
         <Route path="/howto" element={<HowTo/>}></Route>
         <Route path="/checkin" element={<CheckIn1/>}></Route>
+        <Route path="/checkin2" element={<CheckIn2/>}></Route>
         <Route path="/myprogress" element={<MyProgress/>}></Route>
         <Route path="/community" element={<CommunitySupport/>}></Route>
         <Route path="/mygoals" element={<MyGoals/>}></Route>
