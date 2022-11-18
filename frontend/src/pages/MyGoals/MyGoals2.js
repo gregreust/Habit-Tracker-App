@@ -41,7 +41,7 @@ const MyGoals2 = () => {
         console.log(isChecked);
     }
 
-    const handleHabitSubmit = async () => {
+    const handleHabitSubmit = () => {
         addOrRemoveUserHabit.then( navigate('/mygoals'));
     }
 

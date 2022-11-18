@@ -70,6 +70,7 @@ const CheckIn1 = () => {
     }
 
     return ( 
+        // IF USER ALREADY CHECKED IN TODAY, THEN DISPLAY SOME OTHER MESSAGE INSTEAD
         <div className="check-in-screen-1">
             <h3>Did you do this today?</h3>
             <form onSubmit={(event) => handleSubmit(event)}>
