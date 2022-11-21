@@ -1,0 +1,3 @@
+export const MAGICBELL_API_KEY = "01791d9c7df3dbbe8f43c53626195d03de84647c";
+
+
