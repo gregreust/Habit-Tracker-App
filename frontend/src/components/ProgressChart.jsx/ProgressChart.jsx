@@ -17,18 +17,23 @@ const ProgressChart = ({selectedHabits}, {selectedCheckQuestion}) => {
     const [filteredCheckInData, setFilteredCheckInData] = useState([]);
 
     //useEffect: check for props. Create data to graph habit frequency and daily checkin by date. 
-    //HOW DO I GET FROM DJANGO DATE TO PROPER DATE TO GRAPH???
 
-    useEffect(() => {
+    function fetchData () {
         fetchUserHabitFreq();
         fetchUserCheckInData();
-    },[]) 
+    }
 
     const fetchUserHabitFreq = async () => {
         //backend is filtering this to get records associated with the user
         try {
-            let response = await axios.get('http://127.0.0.1:8000/api/habitfreq/user/');
-            setUserHabitFreq(response);
+            let response = await axios.get('http://127.0.0.1:8000/api/habitfreq/user/',
+                {
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                }
+            );
+            setUserHabitFreq(response.data);
         } catch (error){
              //IMPORTANT if no data yet, display "No data yet. Come back after completing a few daily check-ins"
             setDataBoolean(false);
@@ -38,8 +43,15 @@ const ProgressChart = ({selectedHabits}, {selectedCheckQuestion}) => {
 
     const fetchUserCheckInData = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:8000/api/checkin/user/');
-            setUserCheckInData(response);
+            let response = await axios.get('http://127.0.0.1:8000/api/checkin/user/',
+                {
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                }
+            );
+            setUserCheckInData(response.data);
+            console.log(userCheckInData);
         } catch (error) {
             //displays message if no data available yet
             setDataBoolean(false);
@@ -48,24 +60,20 @@ const ProgressChart = ({selectedHabits}, {selectedCheckQuestion}) => {
     }
 
     const createCheckChartData = () => {
-        let checkInData = new google.visualization.DataTable();
-        checkInData.addColumn
-        [
-            ['Date', 'Energy', 'Stress', 'Pain', 'Sleep', 'Quality of life', 'Balance', 'Purpose']
-        ]
+        let CHECK_IN_DATA = ["Date", "Energy", "Stress", "Pain", "Sleep", "Quality of life", "Balance", "Purpose",]
         for (let key in userCheckInData) {
-            checkInData += [
-                userCheckInData[key].date.getTime(), //converts datetime str to int 
+            CHECK_IN_DATA += [
+                userCheckInData[key].date, //convert datetime str to int?????
                 userCheckInData[key].check_in_1,
                 userCheckInData[key].check_in_2,
                 userCheckInData[key].check_in_3,
                 userCheckInData[key].check_in_4,
                 userCheckInData[key].check_in_5,
                 userCheckInData[key].check_in_6,
-                userCheckInData[key].check_in_7
+                userCheckInData[key].check_in_7,
             ]
         }
-        return checkInData;
+        return CHECK_IN_DATA;
 
     }
 
@@ -91,9 +99,10 @@ const ProgressChart = ({selectedHabits}, {selectedCheckQuestion}) => {
                     chartType="LineChart"
                     data={createCheckChartData()} 
                 />
+                <button onClick={fetchData()}>Create Chart</button>
             </div>
         );
-    // }
+    //}
 }
  
 export default ProgressChart;
