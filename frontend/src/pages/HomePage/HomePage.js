@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import './HomePage.css';
 
 const HomePage = () => {
   
@@ -8,12 +9,38 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <Link to="/howto">Getting Started</Link>
-      <Link to="/checkin">Daily Check-in</Link>
-      <Link to="/myprogress">View Progress</Link>
-      <Link to="/community">Community Support</Link>
-      <Link to="/mygoals">My Goals</Link>
-      <Link to="/settings">Settings</Link>
+      <div className="home-page-menu">
+        <div className="left1">
+          <Link to="/howto">
+            <div className="menu-button">Getting Started</div>
+          </Link>
+        </div>
+        <div className="left2">
+          <Link to="/checkin">
+            <div className="menu-button">Daily Check-in</div>
+          </Link>
+        </div>
+        <div className="left3">
+          <Link to="/myprogress">
+            <div className="menu-button">View Progress</div>
+          </Link>
+        </div>
+        <div className="right1">
+          <Link to="/mygoals">
+            <div className="menu-button">My Goals</div>
+          </Link>
+        </div>
+        <div className="right2">
+          <Link to="/community">
+            <div className="menu-button">Community Support</div>
+          </Link>
+        </div>
+        <div className="right3">
+          <Link to="/settings">
+            <div className="menu-button">Settings</div>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

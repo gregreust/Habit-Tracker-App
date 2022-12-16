@@ -13,24 +13,29 @@ html {
   font-family: "Baloo Thambi", sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+  cursor:pointer;
+}
+
 p {
   font-size: 20px;
 }
 
 button {
-  background-color: transparent;
-  border: 2px solid steelblue;
-  color: steelblue;
+  background-color: #81d9b9;
+  color: black;
   font-size: 1rem;
   font-family: inherit;
   max-width: 100px;
   padding: 0.5rem 0.5rem;
 }
 
-button:hover {
-  cursor: pointer;
-  color: white;
-  background-color: steelblue;
+button:hover,
+ button:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em rgb(109, 130, 131);
+  transform: translateY(-0.25em);
 }
 
 .container {

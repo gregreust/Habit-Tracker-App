@@ -1,0 +1,41 @@
+.home-page {
+    width: 100%; 
+    display:flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+.home-page-menu {
+    text-align: center;
+    margin: auto;
+    font-size: 18pt;
+    display: grid;
+    grid-template-rows: 68px 68px 68px;
+    grid-template-columns: 340px 340px;
+    padding: 2rem;
+    border-style: solid;
+    border-radius: 26px;
+}
+
+.home-page-menu a{
+    width: 300px;
+    height: 38px;
+}
+
+.menu-button {
+    background-color: #81d9b9;
+    width: 300px;
+    justify-content: center;
+}
+
+.menu-button:hover,
+ .menu-button:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em rgb(109, 130, 131);
+  transform: translateY(-0.25em);
+}
+
+.left1, .left2, .left3, .right1, .right2, .right3 {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
