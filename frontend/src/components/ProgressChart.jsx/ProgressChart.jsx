@@ -54,7 +54,7 @@ const ProgressChart = () => {
     }
 
     const createCheckChartData = () => {
-        let CHECK_IN_DATA = ["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose"]
+        let CHECK_IN_DATA = ["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose"];
         for (let key in userCheckInData) {
             CHECK_IN_DATA += [
                 userCheckInData[key].date, //convert datetime str to int?????
@@ -66,17 +66,18 @@ const ProgressChart = () => {
                 userCheckInData[key].check_in_6,
                 userCheckInData[key].check_in_7,
             ]
-        }
+        };
+        console.log(CHECK_IN_DATA);
         return CHECK_IN_DATA;
 
     }
 
-    const createHabitChartData = () => {
-        //filter by first habit name, then check array for more habit names
-        for (let key in userHabitFreq){
+    // const createHabitChartData = () => {
+    //     //filter by first habit name, then check array for more habit names
+    //     for (let key in userHabitFreq){
             
-        }
-    }
+    //     }
+    // }
 
     // if (!dataBoolean) {
     //     return(
