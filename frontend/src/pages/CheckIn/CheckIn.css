@@ -1,0 +1,44 @@
+.input [type="range"] {
+   position:absolute;
+  }
+  
+  input [type="range"]:hover {
+    opacity: 1;
+  }
+  
+  input [type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #04AA6D;
+    cursor: pointer;
+  }
+  
+  input [type="range"]::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #04AA6D;
+    cursor: pointer;
+  }
+
+.check-in-screen-2 {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3rem;
+}
+
+.check-in-screen-2 h3 {
+    padding-bottom: 1rem;
+}
+
+.label {
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+.range-1, .range-2, .range-3, .range-4, .range-5, .range-6, .range-7 {
+    display: flex;
+    flex-direction: row;
+}

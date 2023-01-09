@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
+import './CheckIn.css';
 
 const CheckIn2 = () => {
 
@@ -42,75 +43,68 @@ const CheckIn2 = () => {
         return ( 
             <div className="check-in-screen-2">
                 {/* HOW TO MAKE A RANGE COMPONENT TO RECYCLE??? */}
-                <h4>How are you doing today?</h4>
+                <h3>How are you doing today?</h3>
+                <div className="label">My energy level throughout the day</div>
                 <div className="range-1">
                     <div className="left1">Low</div>
-                    <label>My energy level throughout the day
                         <input type="range" 
                         min={1} max={5} 
                         value={response1} 
                         onChange={(e) => setResponse1(e.target.value)}/>
-                    </label>
                     <div className="right1">High</div>
                 </div>
+                <div className="label">I feel stressed or anxious</div>
                 <div className="range-2">
                     <div className="left2">Not often</div>
-                    <label>I feel stressed or anxious
                         <input type="range" 
                         min={1} max={5} 
                         value={response2} 
                         onChange={(e) => setResponse2(e.target.value)}/>
-                    </label>
                     <div className="right2">Constantly</div>
                 </div>
+                <div className="label">Body scan - am I experiencing pain or discomfort? (also pay attention to acne, excema, etc.)</div>
                 <div className="range-3">
                     <div className="left3">Body feels great</div>
-                    <label>Body scan - am I experiencing pain or discomfort? (also pay attention to acne, excema, etc.)
                         <input type="range" 
                         min={1} max={5} 
                         value={response3} 
                         onChange={(e) => setResponse3(e.target.value)}/>
-                    </label>
                     <div className="right3">Body feels terrible</div>
                 </div>
+                <div className="label">Sleep quality last night?</div>
                 <div className="range-4">
                     <div className="left4">Awful</div>
-                    <label>Sleep quality last night?
                         <input type="range" 
                         min={1} max={5} 
                         value={response4} 
                         onChange={(e) => setResponse4(e.target.value)}/>
-                    </label>
                     <div className="right4">Well rested!</div>
                 </div>
+                <div className="label">My life feels rewarding</div>
                 <div className="range-5">
                     <div className="left5">Strongly disagree</div>
-                    <label>My life feels rewarding
                         <input type="range" 
                         min={1} max={5} 
                         value={response5} 
                         onChange={(e) => setResponse5(e.target.value)}/>
-                    </label>
                     <div className="right5">Strongly agree</div>
                 </div>
+                <div className="label">I have enough time to get things done</div>
                 <div className="range-6">
                     <div className="left6">Strongly disagree</div>
-                    <label>I have enough time to get things done
                         <input type="range" 
                         min={1} max={5} 
                         value={response6} 
                         onChange={(e) => setResponse6(e.target.value)}/>
-                    </label>
                     <div className="right6">Strongly agree</div>
                 </div>
+                <div className="label">I have a sense of purpose</div>
                 <div className="range-7">
                     <div className="left7">Strongly disagree</div>
-                    <label>I have a sense of purpose
                         <input type="range" 
                         min={1} max={5} 
                         value={response7} 
                         onChange={(e) => setResponse7(e.target.value)}/>
-                    </label>
                     <div className="right7">Strongly agree</div>
                 </div>
                 
