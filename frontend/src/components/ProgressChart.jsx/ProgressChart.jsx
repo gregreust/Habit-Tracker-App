@@ -12,10 +12,9 @@ const ProgressChart = () => {
 
     //useEffect: check for props. Create data to graph habit frequency and daily checkin by date. 
 
-    function fetchData () {
-        // fetchUserHabitFreq();
+    useEffect (() => {
         fetchUserCheckInData();
-    }
+    }, [])
 
     // const fetchUserHabitFreq = async () => {
     //     //backend is filtering this to get records associated with the user
@@ -79,13 +78,13 @@ const ProgressChart = () => {
     //     }
     // }
 
-    // if (!dataBoolean) {
-    //     return(
-    //         <div className="no-data-message">
-    //             <p>No data to display. Please return to the main menu and fill out your daily check-in.</p>
-    //         </div>
-    //     );
-    // } else {
+    if (!dataBoolean) {
+        return(
+            <div className="no-data-message">
+                <p>No data to display yet.</p>
+            </div>
+        );
+    } else {
         return ( 
             <div className="progress-chart">
                 {/* Chart will show a line for habit consistency and a line for check-in averages
@@ -94,10 +93,9 @@ const ProgressChart = () => {
                     chartType="LineChart"
                     data={createCheckChartData()} 
                 />
-                <button onClick={fetchData()}>Create Chart</button>
             </div>
         );
-    //}
+    }
 }
  
 export default ProgressChart;
