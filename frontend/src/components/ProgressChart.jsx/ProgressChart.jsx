@@ -53,7 +53,7 @@ const ProgressChart = () => {
     }
 
     const createCheckChartData = () => {
-        let CHECK_IN_DATA = ["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose"];
+        let CHECK_IN_DATA = ["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose",];
         for (let key in userCheckInData) {
             CHECK_IN_DATA += [
                 userCheckInData[key].date, //convert datetime str to int?????

@@ -1,0 +1,13 @@
+.HowTo {
+    margin-top: 2rem;
+    margin-inline: 4rem;
+}
+
+.HowTo p {
+    font-size: medium;
+    padding-block: 1rem;
+}
+
+.HowTo a {
+    color: #81d9b9;
+}
