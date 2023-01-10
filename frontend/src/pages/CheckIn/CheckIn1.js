@@ -74,19 +74,21 @@ const CheckIn1 = () => {
         // IF USER ALREADY CHECKED IN TODAY, THEN DISPLAY SOME OTHER MESSAGE INSTEAD
         <div className="check-in-screen-1">
             <h3>Did you do this today?</h3>
-            <form onSubmit={(event) => handleSubmit(event)}>
+            <form>
                 {userHabits&&userHabits.map(habit =>
-                <label key={habit.id}>
-                    <input type="checkbox" 
-                    value={habit.name}
-                    onChange={handleCheck}
-                    />
-                    {habit.name}
-                </label>
-                    )}
-                <input type="submit" value="Next"/>
+                <div className="checklist">
+                    <label key={habit.id}>
+                        <input type="checkbox" 
+                        value={habit.name}
+                        onChange={handleCheck}
+                        />
+                        {habit.name}
+                    </label>
+                </div>
                 
-            </form>
+                    )}
+                </form>
+                <button onClick={(event) => handleSubmit(event)}>Next</button>
         </div>
      );
 }
