@@ -53,19 +53,28 @@ const ProgressChart = () => {
     }
 
     const createCheckChartData = () => {
-        let CHECK_IN_DATA = ["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose",];
-        for (let key in userCheckInData) {
-            CHECK_IN_DATA += [
-                userCheckInData[key].date, //convert datetime str to int?????
-                userCheckInData[key].check_in_1,
-                userCheckInData[key].check_in_2,
-                userCheckInData[key].check_in_3,
-                userCheckInData[key].check_in_4,
-                userCheckInData[key].check_in_5,
-                userCheckInData[key].check_in_6,
-                userCheckInData[key].check_in_7,
-            ]
-        };
+        // let CHECK_IN_DATA = ["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose",];
+        // for (let key in userCheckInData) {
+        //     CHECK_IN_DATA += [
+        //         userCheckInData[key].date, //convert datetime str to int?????
+        //         userCheckInData[key].check_in_1,
+        //         userCheckInData[key].check_in_2,
+        //         userCheckInData[key].check_in_3,
+        //         userCheckInData[key].check_in_4,
+        //         userCheckInData[key].check_in_5,
+        //         userCheckInData[key].check_in_6,
+        //         userCheckInData[key].check_in_7,
+        //     ]
+        // };
+
+        let CHECK_IN_DATA = [];
+        CHECK_IN_DATA.concat(["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose"])
+        
+        let chart_values = userCheckInData.map(x => 
+            //NEED TO RETURN DATE AND INTEGERS, NOT first 2 OBJECT VALUES
+            Object.values(x).splice(0, 2)
+            );
+        CHECK_IN_DATA.concat(chart_values);
         console.log(CHECK_IN_DATA);
         return CHECK_IN_DATA;
 
