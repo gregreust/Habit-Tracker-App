@@ -6,7 +6,7 @@ import { Chart } from "react-google-charts";
 const ProgressChart = () => {
     
     const [user, token] = useAuth();
-    const [dataBoolean, setDataBoolean] = useState(true);
+    const [dataBoolean, setDataBoolean] = useState(false);
     
     const [userCheckInData, setUserCheckInData] = useState([]);
 
@@ -44,7 +44,8 @@ const ProgressChart = () => {
                 }
             );
             setUserCheckInData(response.data);
-            console.log(userCheckInData);
+            console.log(response.data);
+            setDataBoolean(true);
         } catch (error) {
             //displays message if no data available yet
             setDataBoolean(false);
@@ -67,18 +68,22 @@ const ProgressChart = () => {
         //     ]
         // };
 
-        let CHECK_IN_DATA = [];
-        CHECK_IN_DATA.concat(["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose"])
+        let CHART_DATA = [];
+        CHART_DATA.push(["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose"]);
+        console.log(CHART_DATA);
         
-        let chart_values = userCheckInData.map(x => 
+        for (let key in userCheckInData) {
+            let newArr = Object.values(userCheckInData[key]);
             //NEED TO RETURN DATE AND INTEGERS, NOT first 2 OBJECT VALUES
-            Object.values(x).splice(0, 2)
-            );
-        CHECK_IN_DATA.concat(chart_values);
-        console.log(CHECK_IN_DATA);
-        return CHECK_IN_DATA;
+            newArr.splice(0,2);
+            CHART_DATA.push(...[newArr]);
+        }
+
+        console.log(CHART_DATA);
+        return CHART_DATA;
 
     }
+
 
     // const createHabitChartData = () => {
     //     //filter by first habit name, then check array for more habit names
