@@ -92,13 +92,13 @@ const MyGoals2 = () => {
                         {habit.name}
                     </label>
                 )}
-                <input type="submit"/>
+                <button className="checklist-submit-button" type="submit">Submit</button>
             </form>
             <div className="add-custom-habit">
             <h4>Add a custom habit to the list</h4>
             <form onSubmit={handleAddNewHabit}>
                 <input type="text" value={newHabit} onChange={(event) => setNewHabit(event.target.value)}/>
-                <input type="submit" value="Add Habit"/>
+                <button type="submit">Add habit</button>
             </form>
             </div>
         </div>

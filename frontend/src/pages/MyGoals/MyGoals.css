@@ -37,4 +37,14 @@
     flex-direction: column;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    width: 460px;
+    max-height: 300px;
+    overflow: auto;
+    border-style: solid;
+    padding: 16px;
 }
+
+.my-goals-2 .checklist-submit-button {
+    margin-top: 10px;
+}
+
