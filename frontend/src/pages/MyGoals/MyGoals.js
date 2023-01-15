@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import AuthContext from '../../context/AuthContext';
 import axios from 'axios';
+import './MyGoals.css';
 
 const MyGoals = () => {
 
@@ -34,15 +35,18 @@ const MyGoals = () => {
     return ( 
         <div className="my-goals">
             <p>Try to commit to a minimum of 30 days before making adjustments!</p>
-            <h4>Currently Tracking</h4>
-            <ul>
-                {userHabits&&userHabits.map((habit, index) => {
-                    return (
-                        <li key={index}>{habit.name}</li>
-                    )
-                })}
-            </ul>
-            <Link to="/goals2" state={userHabits}><button>Add or remove a habit to track</button></Link>
+            <div className="box">
+                <h4>Currently Tracking</h4>
+                <ul>
+                    {userHabits&&userHabits.map((habit, index) => {
+                        return (
+                            <li key={index}>{habit.name}</li>
+                        )
+                    })}
+                </ul>
+            </div>
+
+            <Link to="/goals2" state={userHabits}><button>Add or remove a <br/> habit to track</button></Link>
 
         </div>
         

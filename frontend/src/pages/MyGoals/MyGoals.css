@@ -1,0 +1,40 @@
+.my-goals {
+    margin-left: 3rem;
+}
+
+.box {
+    border-style: solid;
+    border-radius: 26px;
+    margin-right: 3rem;
+    padding: 1rem;
+}
+
+.my-goals h4 {
+    margin-top: 1rem;
+}
+
+.my-goals ul {
+    display:flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.my-goals li {
+    font-size: 16px;
+}
+
+.my-goals button{
+    margin-top: 1rem;
+    min-width: 200px;
+}
+
+.my-goals-2 {
+    margin-left: 3rem;
+}
+
+.my-goals-2 .habits-checklist {
+    display:flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

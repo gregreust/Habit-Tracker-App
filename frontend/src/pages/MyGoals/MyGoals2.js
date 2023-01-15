@@ -83,11 +83,13 @@ const MyGoals2 = () => {
             <h4>Select habits to track (3 or less is recommended to start)</h4>
             <form className="habits-checklist" onSubmit={(event) => handleHabitSubmit(event)}>
                 {allHabits.map((habit) => 
-                    <label key={habit.id}>{habit.name}
+                    <label key={habit.id}>
                         <input
                             type="checkbox"
                             value={habit}
-                            onChange={handleCheck}/>
+                            onChange={handleCheck}
+                        />
+                        {habit.name}
                     </label>
                 )}
                 <input type="submit"/>
