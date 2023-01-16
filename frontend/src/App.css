@@ -30,6 +30,7 @@ button {
   font-family: inherit;
   max-width: 100px;
   padding: 0.5rem 0.5rem;
+  cursor: pointer;
 }
 
 button:hover,

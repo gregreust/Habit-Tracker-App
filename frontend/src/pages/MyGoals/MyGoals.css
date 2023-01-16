@@ -3,20 +3,16 @@
 }
 
 .box {
-    border-style: solid;
-    border-radius: 26px;
+    background-color: #D9D9D9;
     margin-right: 3rem;
-    padding: 1rem;
-}
-
-.my-goals h4 {
     margin-top: 1rem;
+    padding: 2rem;
 }
 
 .my-goals ul {
     display:flex;
     flex-direction: column;
-    margin: 1rem;
+    margin-left: 1rem;
 }
 
 .my-goals li {
@@ -32,16 +28,25 @@
     margin-left: 3rem;
 }
 
-.my-goals-2 .habits-checklist {
+.my-goals-2 .habit-names {
     display:flex;
     flex-direction: column;
+    width: 460px;
+    max-height: 240px;
+    overflow: auto;
+   
+}
+
+.my-goals-2 .habit-checklist {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    width: 460px;
-    max-height: 300px;
-    overflow: auto;
-    border-style: solid;
+    background-color: #D9D9D9;
+    width: 480px;
     padding: 16px;
+}
+
+.my-goals-2 input[type="checkbox"] {
+    margin-right: 4px;
 }
 
 .my-goals-2 .checklist-submit-button {

@@ -80,18 +80,20 @@ const MyGoals2 = () => {
 
     return ( 
         <div className="my-goals-2">
-            <h4>Select habits to track (3 or less is recommended to start)</h4>
-            <form className="habits-checklist" onSubmit={(event) => handleHabitSubmit(event)}>
-                {allHabits.map((habit) => 
-                    <label key={habit.id}>
-                        <input
-                            type="checkbox"
-                            value={habit}
-                            onChange={handleCheck}
-                        />
-                        {habit.name}
-                    </label>
-                )}
+            <h4>Choose habits to track (3 or less is recommended to start)</h4>
+            <form className="habit-checklist" onSubmit={(event) => handleHabitSubmit(event)}>
+                <div className="habit-names">
+                    {allHabits.map((habit) => 
+                        <label key={habit.id}>
+                            <input
+                                type="checkbox"
+                                value={habit}
+                                onChange={handleCheck}
+                            />
+                            {habit.name}
+                        </label>
+                    )}
+                </div>
                 <button className="checklist-submit-button" type="submit">Submit</button>
             </form>
             <div className="add-custom-habit">
