@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'check_in_values',
     'habit_frequency',
     'habits',
+    'quotes',
 ]
 
 MIDDLEWARE = [

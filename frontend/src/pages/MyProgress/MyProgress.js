@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import ProgressChart from '../../components/ProgressChart.jsx/ProgressChart';
+import ProgressChart from '../../components/ProgressChart/ProgressChart';
 
 
 const MyProgress = () => {
