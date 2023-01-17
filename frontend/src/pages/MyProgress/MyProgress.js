@@ -1,15 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ProgressChart from '../../components/ProgressChart/ProgressChart';
+import ConsistencyTable from '../../components/ConsistencyTable';
 
 
 const MyProgress = () => {
-
-    // const [startDate, setStartDate] = useState(new Date().toLocaleDateString());
-    // const [endDate, setEndDate] = useState(new Date().toLocaleDateString());
-    // const [selectedHabits, setSelectedHabits] = useState([]);
-    // const [selectedCheckQuestion, setSelectedCheckQuestion] = useState([]);
-
-    
 
     return ( 
         <div className="my-progress-page">
@@ -17,6 +11,7 @@ const MyProgress = () => {
             {/* Chart will show a line for habit consistency and a line for check-in averages
             User has option to choose which habit is displayed, or which check-in question is displayed */}
             <ProgressChart />
+            <ConsistencyTable />
 
         </div>
 

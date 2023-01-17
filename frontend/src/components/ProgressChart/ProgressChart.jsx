@@ -8,31 +8,11 @@ const ProgressChart = () => {
     const [user, token] = useAuth();
     const [dataBoolean, setDataBoolean] = useState(false);
     
-    const [userCheckInData, setUserCheckInData] = useState([]);
-
-    //useEffect: check for props. Create data to graph habit frequency and daily checkin by date. 
+    const [userCheckInData, setUserCheckInData] = useState([]); 
 
     useEffect (() => {
         fetchUserCheckInData();
     }, [])
-
-    // const fetchUserHabitFreq = async () => {
-    //     //backend is filtering this to get records associated with the user
-    //     try {
-    //         let response = await axios.get('http://127.0.0.1:8000/api/habitfreq/user/',
-    //             {
-    //                 headers: {
-    //                     Authorization: "Bearer " + token,
-    //                 },
-    //             }
-    //         );
-    //         setUserHabitFreq(response.data);
-    //     } catch (error){
-    //          //IMPORTANT if no data yet, display "No data yet. Come back after completing a few daily check-ins"
-    //         setDataBoolean(false);
-    //         console.log(error);
-    //     }
-    // }
 
     const fetchUserCheckInData = async () => {
         try {
@@ -54,20 +34,6 @@ const ProgressChart = () => {
     }
 
     const createCheckChartData = () => {
-        // let CHECK_IN_DATA = ["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose",];
-        // for (let key in userCheckInData) {
-        //     CHECK_IN_DATA += [
-        //         userCheckInData[key].date, //convert datetime str to int?????
-        //         userCheckInData[key].check_in_1,
-        //         userCheckInData[key].check_in_2,
-        //         userCheckInData[key].check_in_3,
-        //         userCheckInData[key].check_in_4,
-        //         userCheckInData[key].check_in_5,
-        //         userCheckInData[key].check_in_6,
-        //         userCheckInData[key].check_in_7,
-        //     ]
-        // };
-
         let CHART_DATA = [];
         CHART_DATA.push(["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose"]);
         console.log(CHART_DATA);
@@ -83,14 +49,6 @@ const ProgressChart = () => {
         return CHART_DATA;
 
     }
-
-
-    // const createHabitChartData = () => {
-    //     //filter by first habit name, then check array for more habit names
-    //     for (let key in userHabitFreq){
-            
-    //     }
-    // }
 
     if (!dataBoolean) {
         return(
