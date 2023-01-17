@@ -10,7 +10,6 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <div className="quote"><RandomQuote/></div>
       <div className="home-page-menu">
         <div className="left1">
           <Link to="/howto">
@@ -43,8 +42,9 @@ const HomePage = () => {
           </Link>
         </div>
       </div>
+      <div className="quote"><RandomQuote/></div>
       <div className="zenquote-note">Inspirational quotes provided by 
-        <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a>
+        <a href="https://zenquotes.io/" target="_blank"> ZenQuotes API</a>
       </div>
     </div>
   );

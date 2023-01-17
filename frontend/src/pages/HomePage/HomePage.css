@@ -1,9 +1,11 @@
 .home-page {
     width: 100%; 
     display:flex;
+    flex-direction: column;
     justify-content: center;
     margin-top: 4rem;
 }
+
 .home-page-menu {
     text-align: center;
     margin: auto;
@@ -39,3 +41,20 @@
     align-items: center;
 }
 
+.quote {
+    align-self:center;
+    margin: 1rem;
+}
+
+.quote-container .author {
+    text-align: right;
+}
+
+.zenquote-note {
+    align-self: center;
+    color: rgb(114, 114, 114);
+}
+
+.zenquote-note a {
+    color: rgb(114, 114, 114);
+}
