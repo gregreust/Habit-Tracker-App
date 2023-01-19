@@ -11,7 +11,7 @@ const MyProgress = () => {
             {/* Chart will show a line for habit consistency and a line for check-in averages
             User has option to choose which habit is displayed, or which check-in question is displayed */}
             <ProgressChart />
-            <ConsistencyTable />
+            {/* <ConsistencyTable /> */}
 
         </div>
 

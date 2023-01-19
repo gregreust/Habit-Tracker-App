@@ -6,6 +6,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import HabitFrequency
 from .serializers import HabitFreqSerializer
 from django.shortcuts import get_list_or_404, get_object_or_404
+import datetime
 
 #Get all data for testing purposes only 
 @api_view(['GET'])
@@ -19,7 +20,20 @@ def get_all_habit_data(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user_habit_data(request):
+
+    date_param = request.query_params.get('date') 
     habit_data = get_list_or_404(HabitFrequency, user=request.user)
+    
+    if date_param:
+        #This turns the date string into a python date and subtracts 40 days
+        format = '%Y-%m-%d'      
+        python_date = datetime.datetime.strptime(date_param, format) - datetime.timedelta(days=40)
+        print(python_date)
+        #Returns every entry newer than 40 days ago
+        queryset = HabitFrequency.objects.filter(date_submitted > python_date)
+        serializer = HabitFreqSerializer(queryset, many=True)
+        return Response(serializer.data)
+
     serializer = HabitFreqSerializer(habit_data, many=True)
     return Response(serializer.data)
 
