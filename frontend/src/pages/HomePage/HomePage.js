@@ -5,9 +5,6 @@ import RandomQuote from '../../components/RandomQuote';
 
 const HomePage = () => {
   
-  // useEffect with a daily tip from the database here!!!
-
-
   return (
     <div className="home-page">
       <div className="home-page-menu">

@@ -40,8 +40,10 @@ const ProgressChart = () => {
         
         for (let key in userCheckInData) {
             let newArr = Object.values(userCheckInData[key]);
-            //NEED TO RETURN DATE AND INTEGERS, NOT first 2 OBJECT VALUES
+            //gets date and integers, NOT first 2 object values
             newArr.splice(0,2);
+            //takes the unneeded info out of date
+            newArr[0] = newArr[0].substring(5,10);
             CHART_DATA.push(...[newArr]);
         }
 
@@ -59,8 +61,7 @@ const ProgressChart = () => {
     } else {
         return ( 
             <div className="progress-chart">
-                {/* Chart will show a line for habit consistency and a line for check-in averages
-                User has option to choose which habit is displayed, or which check-in question is displayed */}
+                {/* ADD A WAY TO FILTER WHICH HABIT OR CHECKIN IS BEING DISPLAYED */}
                 <Chart
                     chartType="LineChart"
                     data={createCheckChartData()} 

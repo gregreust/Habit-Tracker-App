@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import AuthContext from '../../context/AuthContext';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 
@@ -9,7 +8,6 @@ const MyGoals2 = () => {
     const navigate = useNavigate();
     const [user, token] = useAuth();
     const [allHabits, setAllHabits] = useState([]);
-    // const {userHabits} = useContext(AuthContext);
     const userHabits = useLocation();
     const [isChecked, setisChecked] = useState([]);
     const [newHabit, setNewHabit] = useState([]);
