@@ -76,8 +76,8 @@ const CheckIn1 = () => {
             <h3>Did you do this today?</h3>
             <form>
                 {userHabits&&userHabits.map(habit =>
-                <div className="checklist">
-                    <label key={habit.id}>
+                <div className="checklist" key={habit.id}>
+                    <label>
                         <input type="checkbox" 
                         value={habit.name}
                         onChange={handleCheck}
@@ -87,8 +87,8 @@ const CheckIn1 = () => {
                 </div>
                 
                     )}
-                </form>
-                <button onClick={(event) => handleSubmit(event)}>Next</button>
+            </form>
+            <button onClick={(event) => handleSubmit(event)}>Next</button>
         </div>
      );
 }

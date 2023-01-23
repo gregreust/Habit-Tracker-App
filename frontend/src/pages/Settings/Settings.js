@@ -7,12 +7,14 @@ import axios from 'axios';
 const Settings = () => {
 
     const [user, token] = useAuth();
-    const [toastTime, setToastTime] = useState();
+    const [toastTime, setToastTime] = useState(user.reminder_time);
 
     async function handleSubmit (e) {
-        e.preventdefault();
+        e.preventDefault();
+        console.log(user.reminder_time)
+        console.log(toastTime);
         //put new time to user.reminder_time
-        await axios.put();
+        await axios.patch();
     }
 
     return ( 
@@ -27,7 +29,7 @@ const Settings = () => {
             <div className="toast-settings">
                 {/* 1. Create form where user can select a time for daily notifications */}
                 <form className="time-selector">
-                    <label for="appt">Select a time:</label>
+                    <label>Select a time for daily check-in reminder:</label>
                     <input type="time" value="time" defaultValue={user.reminder_time} 
                         onChange={(e) => {setToastTime(e.target.value)}}>
                     </input>
