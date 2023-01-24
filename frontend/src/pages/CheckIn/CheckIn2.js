@@ -44,16 +44,19 @@ const CheckIn2 = () => {
             <div className="check-in-screen-2">
                 {/* HOW TO MAKE A RANGE COMPONENT TO RECYCLE??? */}
                 <h3>How are you doing today?</h3>
-                <div className="label">My energy level throughout the day</div>
+                <div className="label">My energy level throughout the day :  {response1}</div>
                 <div className="range-1">
                     <div className="left1">Low</div>
-                        <input type="range" 
-                        min={1} max={5} 
-                        value={response1} 
-                        onChange={(e) => setResponse1(e.target.value)}/>
+                        <div className="slider">
+                            <input type="range" 
+                            min={1} max={5} 
+                            value={response1} 
+                            onChange={(e) => setResponse1(e.target.value)}/>
+                        </div>
+                        
                     <div className="right1">High</div>
                 </div>
-                <div className="label">I feel stressed or anxious</div>
+                <div className="label">I feel stressed or anxious :  {response2}</div>
                 <div className="range-2">
                     <div className="left2">Not often</div>
                         <input type="range" 
@@ -62,7 +65,7 @@ const CheckIn2 = () => {
                         onChange={(e) => setResponse2(e.target.value)}/>
                     <div className="right2">Constantly</div>
                 </div>
-                <div className="label">Body scan - am I experiencing pain or discomfort? (also pay attention to acne, excema, etc.)</div>
+                <div className="label">Body scan - am I experiencing pain or discomfort? (also pay attention to acne, excema, etc.) :  {response3}</div>
                 <div className="range-3">
                     <div className="left3">Body feels great</div>
                         <input type="range" 
@@ -71,7 +74,7 @@ const CheckIn2 = () => {
                         onChange={(e) => setResponse3(e.target.value)}/>
                     <div className="right3">Body feels terrible</div>
                 </div>
-                <div className="label">Sleep quality last night?</div>
+                <div className="label">Sleep quality last night? :  {response4}</div>
                 <div className="range-4">
                     <div className="left4">Awful</div>
                         <input type="range" 
@@ -80,7 +83,7 @@ const CheckIn2 = () => {
                         onChange={(e) => setResponse4(e.target.value)}/>
                     <div className="right4">Well rested!</div>
                 </div>
-                <div className="label">My life feels rewarding</div>
+                <div className="label">My life feels rewarding :  {response5}</div>
                 <div className="range-5">
                     <div className="left5">Strongly disagree</div>
                         <input type="range" 
@@ -89,7 +92,7 @@ const CheckIn2 = () => {
                         onChange={(e) => setResponse5(e.target.value)}/>
                     <div className="right5">Strongly agree</div>
                 </div>
-                <div className="label">I have enough time to get things done</div>
+                <div className="label">I have enough time to get things done :  {response6}</div>
                 <div className="range-6">
                     <div className="left6">Strongly disagree</div>
                         <input type="range" 
@@ -98,7 +101,7 @@ const CheckIn2 = () => {
                         onChange={(e) => setResponse6(e.target.value)}/>
                     <div className="right6">Strongly agree</div>
                 </div>
-                <div className="label">I have a sense of purpose</div>
+                <div className="label">I have a sense of purpose :  {response7}</div>
                 <div className="range-7">
                     <div className="left7">Strongly disagree</div>
                         <input type="range" 

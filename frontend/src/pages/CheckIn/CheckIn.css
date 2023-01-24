@@ -21,20 +21,18 @@ input [type="range"] {
     opacity: 1;
   }
   
-  input [type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
+  .slider [type="range"]::-webkit-slider-thumb {
     appearance: none;
-    width: 25px;
-    height: 25px;
     border-radius: 50%;
+    border-width: 2px;
     background: #04AA6D;
     cursor: pointer;
   }
   
   input [type="range"]::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
+    appearance: none;
     border-radius: 50%;
+    border-width: 2px;
     background: #04AA6D;
     cursor: pointer;
   }
@@ -52,10 +50,19 @@ input [type="range"] {
 .label {
     margin-top: 1rem;
     margin-left: 1rem;
+    border-top-style: solid;
+    padding-top: 6px;
+    max-width: 640px;
 }
 .range-1, .range-2, .range-3, .range-4, .range-5, .range-6, .range-7 {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    max-width: 600px;
+}
+
+.range-7 {
+  margin-bottom: 1rem;
 }
 
 .check-in-confirm {

@@ -40,7 +40,7 @@ const MyGoals2 = () => {
     }
 
     const handleHabitSubmit = () => {
-        addOrRemoveUserHabit.then( navigate('/mygoals'));
+        addOrRemoveUserHabit().then( navigate('/mygoals'));
     }
 
     const addOrRemoveUserHabit = async () => {
@@ -96,9 +96,9 @@ const MyGoals2 = () => {
             </form>
             <div className="add-custom-habit">
             <h4>Add a custom habit to the list</h4>
-            <form onSubmit={handleAddNewHabit}>
+            <form>
                 <input type="text" value={newHabit} onChange={(event) => setNewHabit(event.target.value)}/>
-                <button type="submit">Add habit</button>
+                <button type="submit" onClick={(event) => handleAddNewHabit(event)}>Add habit</button>
             </form>
             </div>
         </div>
