@@ -22,7 +22,7 @@ def get_all_habit_data(request):
 def get_user_habit_data(request):
 
     date_param = request.query_params.get('date') 
-    habit_data = get_list_or_404(HabitFrequency, user=request.user)
+    habit_data = get_list_or_404(HabitFrequency, user=request.user.id)
     
     if date_param:
         #This turns the date string into a python date and subtracts 40 days
@@ -30,7 +30,7 @@ def get_user_habit_data(request):
         python_date = datetime.datetime.strptime(date_param, format) - datetime.timedelta(days=40)
         print(python_date)
         #Returns every entry newer than 40 days ago
-        queryset = HabitFrequency.objects.filter(date_submitted > python_date)
+        queryset = HabitFrequency.objects.filter(date_submitted__gt = python_date)
         serializer = HabitFreqSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -43,6 +43,6 @@ def get_user_habit_data(request):
 def post_new_check_in(request):
     serializer = HabitFreqSerializer(data=request.data, partial=True)
     if serializer.is_valid():
-        serializer.save(user=request.user)
+        serializer.save(user=request.user.id)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

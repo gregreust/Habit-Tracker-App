@@ -12,4 +12,4 @@ class User(AbstractUser):
     For just a few roles, adding boolean fields is advised
     '''
     habits = models.ManyToManyField(Habits)
-    reminder_time = models.TimeField(null=True)
+    reminder_time = models.IntegerField(null=True)

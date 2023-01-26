@@ -30,8 +30,56 @@ const Settings = () => {
                 {/* 1. Create form where user can select a time for daily notifications */}
                 <form className="time-selector">
                     <label>Select a time for daily check-in reminder:</label>
-                    <input type="time" value="time" defaultValue={user.reminder_time} 
+                    <input type="select" value="time" defaultValue={user.reminder_time} 
                         onChange={(e) => {setToastTime(e.target.value)}}>
+                            <option>0000</option>
+                            <option>0030</option>
+                            <option>0100</option>
+                            <option>0130</option>
+                            <option>0200</option>
+                            <option>0230</option>
+                            <option>0300</option>
+                            <option>0330</option>
+                            <option>0400</option>
+                            <option>0430</option>
+                            <option>0500</option>
+                            <option>0530</option>
+                            <option>0600</option>
+                            <option>0630</option>
+                            <option>0700</option>
+                            <option>0730</option>
+                            <option>0800</option>
+                            <option>0830</option>
+                            <option>0900</option>
+                            <option>0930</option>
+                            <option>1000</option>
+                            <option>1030</option>
+                            <option>1100</option>
+                            <option>1130</option>
+                            <option>1200</option>
+                            <option>1230</option>
+                            <option>1300</option>
+                            <option>1330</option>
+                            <option>1400</option>
+                            <option>1430</option>
+                            <option>1500</option>
+                            <option>1530</option>
+                            <option>1600</option>
+                            <option>1630</option>
+                            <option>1700</option>
+                            <option>1730</option>
+                            <option>1800</option>
+                            <option>1830</option>
+                            <option>1900</option>
+                            <option>1930</option>
+                            <option>2000</option>
+                            <option>2030</option>
+                            <option>2100</option>
+                            <option>2130</option>
+                            <option>2200</option>
+                            <option>2230</option>
+                            <option>2300</option>
+                            <option>2330</option>
                     </input>
                     <button type="submit" onClick={(e) => handleSubmit(e)}></button>
                 </form>

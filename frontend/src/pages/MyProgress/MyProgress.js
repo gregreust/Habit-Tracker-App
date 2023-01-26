@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressChart from '../../components/ProgressChart/ProgressChart';
+import ProgressChart from '../../components/ProgressChart';
 import ConsistencyTable from '../../components/ConsistencyTable';
 
 
@@ -9,7 +9,7 @@ const MyProgress = () => {
         <div className="my-progress-page">
             <h4>Track progress</h4>
             <ProgressChart />
-            {/* <ConsistencyTable /> */}
+            <ConsistencyTable />
 
         </div>
 
