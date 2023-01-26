@@ -51,3 +51,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+class ReminderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'password', 'email',
+                  'first_name', 'last_name', 'habits', 'reminder_time']
