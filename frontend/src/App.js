@@ -1,6 +1,8 @@
 // General Imports
 import { Routes, Route } from "react-router-dom";
+import React, {useEffect} from "react";
 import "./App.css";
+import useAuth from "./hooks/useAuth";
 
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
@@ -22,8 +24,54 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+import axios from "axios";
 
 function App() {
+
+  const [user, token] = useAuth();
+  const nowDate = new Date();
+
+  useEffect(() => {
+    let reminderTime = fetchReminderTime().toString();
+    //finds difference bewteen reminder time and now
+    let timeDiff = findTimeDifference(reminderTime);
+    //sets timer for above difference, then displays toast 
+    toastTimer(timeDiff);
+  }, []);
+
+  async function fetchReminderTime() {
+    let response = await axios.get('http://127.0.0.1:8000/api/auth/reminder/',
+            {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+    return response.data;
+
+  }
+
+  function findTimeDifference(reminderTime) {
+    let reminderTimeMin = "";
+    let reminderTimeHour = reminderTime.toString().slice(-2);
+    if (reminderTime.length() == 4){
+      reminderTimeMin = reminderTime.toString().slice(2);
+    } else {
+      reminderTimeMin = reminderTime.toString().slice(1);
+    }
+    //get difference from current time to reminder time in minutes
+    let timeDiff = Math.abs((parseInt(reminderTimeHour) - nowDate.getHours()))*60 + Math.abs(parseInt(reminderTimeMin) - nowDate.getMinutes());
+    return timeDiff;
+  }
+
+  function toastTimer(timeDiffMinutes) {
+    let timeDiffMillisecs = timeDiffMinutes * 10000;
+    setTimeout(function () {
+        //Display toast notification when time runs out
+        
+    }, timeDiffMillisecs);
+}
+
+
   return (
     <div>
       <Navbar />

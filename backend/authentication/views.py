@@ -18,13 +18,17 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = RegistrationSerializer
 
-@api_view(['PATCH'])
-def set_reminder_time(request):
-    #patch user reminder time to match request.data 
+@api_view(['GET', 'PATCH'])
+def set_reminder_time(request): 
     this_user = User.objects.get(username=request.user)
-    serializer = ReminderSerializer(this_user, data=request.data, partial=True)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+    if (request.method == 'GET'):
+        reminder = this_user.reminder_time
+        return Response(reminder, status=status.HTTP_200_OK)
+    elif (request.method == 'PATCH'):
+        #patch user reminder time to match request.data 
+        serializer = ReminderSerializer(this_user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 

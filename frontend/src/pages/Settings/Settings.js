@@ -7,14 +7,19 @@ import axios from 'axios';
 const Settings = () => {
 
     const [user, token] = useAuth();
-    const [toastTime, setToastTime] = useState(user.reminder_time);
+    const [toastTime, setToastTime] = useState();
 
     async function handleSubmit (e) {
         e.preventDefault();
-        console.log(user.reminder_time)
-        console.log(toastTime);
         //put new time to user.reminder_time
-        await axios.patch();
+        let newTime = {"notification_time": [toastTime]};
+        await axios.patch(`http://127.0.0.1:8000/api/auth/reminder/`, newTime,
+        {
+            headers: {
+                Authorization: "Bearer " + token,
+            },
+        });
+        console.log(newTime);
     }
 
     return ( 
@@ -30,7 +35,7 @@ const Settings = () => {
                 {/* 1. Create form where user can select a time for daily notifications */}
                 <form className="time-selector">
                     <label>Select a time for daily check-in reminder:</label>
-                    <input type="select" value="time" defaultValue={user.reminder_time} 
+                    <select value={toastTime} defaultValue={user.reminder_time} 
                         onChange={(e) => {setToastTime(e.target.value)}}>
                             <option>0000</option>
                             <option>0030</option>
@@ -80,10 +85,9 @@ const Settings = () => {
                             <option>2230</option>
                             <option>2300</option>
                             <option>2330</option>
-                    </input>
-                    <button type="submit" onClick={(e) => handleSubmit(e)}></button>
+                    </select>
+                    <button type="submit" onClick={(e) => handleSubmit(e)}>Set Reminder Time</button>
                 </form>
-                {/* 2. Post the selected time to user.reminder_time just like posting to habits list */}
             </div>
         </div>
             
