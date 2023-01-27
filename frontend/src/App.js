@@ -1,6 +1,6 @@
 // General Imports
 import { Routes, Route } from "react-router-dom";
-import React, {useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import "./App.css";
 import useAuth from "./hooks/useAuth";
 
@@ -25,10 +25,13 @@ import Footer from "./components/Footer/Footer";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
   const [user, token] = useAuth();
+  const [display, setDisplay] = useState();
   const nowDate = new Date();
 
   useEffect(() => {
@@ -67,7 +70,7 @@ function App() {
     let timeDiffMillisecs = timeDiffMinutes * 10000;
     setTimeout(function () {
         //Display toast notification when time runs out
-        
+        toast("Time to fill out your daily check in!");;
     }, timeDiffMillisecs);
 }
 
@@ -75,6 +78,7 @@ function App() {
   return (
     <div>
       <Navbar />
+      <ToastContainer />
       <Routes>
         <Route
           path="/"
