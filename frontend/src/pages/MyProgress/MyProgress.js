@@ -8,10 +8,9 @@ const MyProgress = () => {
 
     return ( 
         <div className="my-progress-page">
-            <h4>Track progress</h4>
+            <h3>Track progress from the last 40 days</h3>
             <ProgressChart />
             <ConsistencyTable />
-
         </div>
 
     );

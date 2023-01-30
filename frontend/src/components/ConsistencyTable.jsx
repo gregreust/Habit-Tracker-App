@@ -55,11 +55,12 @@ const ConsistencyTable = () => {
     else {
         return (
             <div className="consistency-table">
-               <ul>
+                <h4>How many times done in the last 40 days</h4>
+                <ul>
                     {habitCount&&Object.keys(habitCount).map((keyName, i) => {
                         return(<li key={i}>{keyName + ": " + habitCount[keyName]}</li>);
                     })}
-               </ul>
+                </ul>
             </div>
         );
     }

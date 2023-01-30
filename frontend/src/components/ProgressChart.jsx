@@ -7,8 +7,8 @@ const ProgressChart = () => {
     
     const [user, token] = useAuth();
     const [dataBoolean, setDataBoolean] = useState(false);
-    
     const [userCheckInData, setUserCheckInData] = useState([]); 
+    const todayDate = new Date().toISOString().split('T')[0];
 
     useEffect (() => {
         fetchUserCheckInData();
@@ -16,7 +16,7 @@ const ProgressChart = () => {
 
     const fetchUserCheckInData = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:8000/api/checkin/user/',
+            let response = await axios.get(`http://127.0.0.1:8000/api/checkin/user/?date=${todayDate}`,
                 {
                     headers: {
                         Authorization: "Bearer " + token,
