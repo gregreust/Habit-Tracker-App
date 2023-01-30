@@ -19,7 +19,19 @@ def get_all_checkin_data(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user_checkin_data(request):
-    checkin_data = get_list_or_404(CheckInValues, user=request.user)
+    date_param = request.query_params.get('date') 
+    checkin_data = get_list_or_404(CheckInValues, user=request.user.id)
+
+    if date_param:
+        #This turns the date string into a python date and subtracts 40 days
+        format = '%Y-%m-%d'      
+        python_date = datetime.datetime.strptime(date_param, format) - datetime.timedelta(days=40)
+        print(python_date)
+        #Returns every entry newer than 40 days ago
+        queryset = CheckInValues.objects.filter(date__gt = python_date)
+        serializer = CheckInSerializer()(queryset, many=True)
+        return Response(serializer.data)
+
     serializer = CheckInSerializer(checkin_data, many=True)
     return Response(serializer.data)
 
