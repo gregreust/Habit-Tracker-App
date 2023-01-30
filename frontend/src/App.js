@@ -60,7 +60,7 @@ function App() {
 
   function findTimeDifference(reminderTime) {
     let reminderTimeMin = "";
-    let reminderTimeHour = reminderTime.slice(-2);
+    let reminderTimeHour = reminderTime.slice(0, -2);
     if (reminderTime.length == 4){
       reminderTimeMin = reminderTime.slice(2);
     } else {
@@ -68,15 +68,25 @@ function App() {
     }
     //get difference from current time to reminder time in minutes
     let timeDiff = Math.abs((parseInt(reminderTimeHour) - nowDate.getHours()))*60 + Math.abs(parseInt(reminderTimeMin) - nowDate.getMinutes());
+    console.log(timeDiff);
     return timeDiff;
   }
 
   function toastTimer(timeDiffMinutes) {
-    let timeDiffMillisecs = timeDiffMinutes * 10000;
-    console.log(timeDiffMillisecs)
+    let timeDiffMillisecs = timeDiffMinutes * 60000;
+    console.log(timeDiffMillisecs);
     setTimeout(function () {
         //Display toast notification when time runs out
-        toast("Time to fill out your daily check in!");
+        toast("Time to fill out your daily check in!", {
+          position: "top-center",
+          autoClose: false,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
     }, timeDiffMillisecs);
 }
 
@@ -84,7 +94,14 @@ function App() {
   return (
     <div>
       <Navbar />
-      <ToastContainer />
+      <ToastContainer 
+          position="top-center"
+          autoClose={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          theme="colored"      
+      />
       <Routes>
         <Route
           path="/"
