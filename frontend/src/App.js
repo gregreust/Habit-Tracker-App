@@ -35,11 +35,8 @@ function App() {
   const nowDate = new Date();
 
   useEffect(() => {
-    let reminderTime = fetchReminderTime().toString();
-    //finds difference bewteen reminder time and now
-    let timeDiff = findTimeDifference(reminderTime);
-    //sets timer for above difference, then displays toast 
-    toastTimer(timeDiff);
+    fetchReminderTime().then(response => handleResponse(response))
+      .catch(error => {console.log(error)});
   }, []);
 
   async function fetchReminderTime() {
@@ -50,16 +47,24 @@ function App() {
                 },
             });
     return response.data;
+  }
 
+  function handleResponse(reminderTimeResponse) {
+    let reminderTime = reminderTimeResponse.toString();
+    console.log(reminderTime);
+    //finds difference bewteen reminder time and now
+    let timeDiff = findTimeDifference(reminderTime);
+    //sets timer for above difference, then displays toast 
+    toastTimer(timeDiff);
   }
 
   function findTimeDifference(reminderTime) {
     let reminderTimeMin = "";
-    let reminderTimeHour = reminderTime.toString().slice(-2);
-    if (reminderTime.length() == 4){
-      reminderTimeMin = reminderTime.toString().slice(2);
+    let reminderTimeHour = reminderTime.slice(-2);
+    if (reminderTime.length == 4){
+      reminderTimeMin = reminderTime.slice(2);
     } else {
-      reminderTimeMin = reminderTime.toString().slice(1);
+      reminderTimeMin = reminderTime.slice(1);
     }
     //get difference from current time to reminder time in minutes
     let timeDiff = Math.abs((parseInt(reminderTimeHour) - nowDate.getHours()))*60 + Math.abs(parseInt(reminderTimeMin) - nowDate.getMinutes());
@@ -68,9 +73,10 @@ function App() {
 
   function toastTimer(timeDiffMinutes) {
     let timeDiffMillisecs = timeDiffMinutes * 10000;
+    console.log(timeDiffMillisecs)
     setTimeout(function () {
         //Display toast notification when time runs out
-        toast("Time to fill out your daily check in!");;
+        toast("Time to fill out your daily check in!");
     }, timeDiffMillisecs);
 }
 
