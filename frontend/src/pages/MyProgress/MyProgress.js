@@ -1,6 +1,7 @@
 import React from 'react';
 import ProgressChart from '../../components/ProgressChart';
 import ConsistencyTable from '../../components/ConsistencyTable';
+import './MyProgress.css';
 
 
 const MyProgress = () => {

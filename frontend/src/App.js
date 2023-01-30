@@ -77,13 +77,10 @@ function App() {
     console.log(timeDiffMillisecs);
     setTimeout(function () {
         //Display toast notification when time runs out
-        toast("Time to fill out your daily check in!", {
+        toast.info("Time to fill out your daily check in!", {
           position: "top-center",
           autoClose: false,
           hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
           progress: undefined,
           theme: "colored",
         });
@@ -97,9 +94,6 @@ function App() {
       <ToastContainer 
           position="top-center"
           autoClose={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
           theme="colored"      
       />
       <Routes>

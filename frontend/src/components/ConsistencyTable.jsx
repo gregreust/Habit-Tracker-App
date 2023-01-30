@@ -22,33 +22,31 @@ const ConsistencyTable = () => {
                 },
             }
         );
-        console.log(response.data);
-        setDataBoolean(true);
         setHabitCount(() => countHabitNames(response.data));
+        setDataBoolean(true);
+        console.log(habitCount);
     }
 
     //last40Days is the response from axios fetchData
     function countHabitNames (last40Days) {
-        let habitCount = {};
-        for (let key in last40Days) {
-            let name = last40Days[key].habit_name;
-            if (last40Days[key].yes_or_no) {
-                if (!name in habitCount) {
-                    //adds name of habit: 1 to habitCount
-                    habitCount = {...habitCount, [name]: 1};
-                }
-                else {
-                    habitCount[name]++;
-                }
+        let filteredData = last40Days.filter(x => x.yes_or_no === true);
+        let names = [];
+        for (let key in filteredData) {
+            if (!names.includes(filteredData[key].habit_name)) {
+                names.push(filteredData[key].habit_name);
             }
         }
-        console.log(habitCount);
+        //Counts the number of each habit name 
+        let habitCount = {};
+        for (let key in names) {
+            let n = filteredData.filter(x => x.habit_name === names[key]);
+            habitCount[names[key]] = n.length;
+        }
         return habitCount;
     }
 
     if (!dataBoolean){
         return ( 
-
             <div className="consistency-fetch">
                 <button onClick={(e) => fetchData(e)}>View Habit Consistency</button>
             </div>
@@ -57,14 +55,11 @@ const ConsistencyTable = () => {
     else {
         return (
             <div className="consistency-table">
-                {/* <ul>
-                    {habitCount&&habitCount.map((x, index) => {
-                        return (
-                            <li key={index}>{x}</li>
-                        )
+               <ul>
+                    {habitCount&&Object.keys(habitCount).map((keyName, i) => {
+                        return(<li key={i}>{keyName + ": " + habitCount[keyName]}</li>);
                     })}
-                </ul>
-     */}
+               </ul>
             </div>
         );
     }
