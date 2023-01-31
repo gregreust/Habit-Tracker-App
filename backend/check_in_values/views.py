@@ -6,6 +6,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import CheckInValues
 from .serializers import CheckInSerializer
 from django.shortcuts import get_list_or_404, get_object_or_404
+import datetime
 
 #Get all data for testing purposes only 
 @api_view(['GET'])
@@ -29,7 +30,7 @@ def get_user_checkin_data(request):
         print(python_date)
         #Returns every entry newer than 40 days ago
         queryset = CheckInValues.objects.filter(date__gt = python_date)
-        serializer = CheckInSerializer()(queryset, many=True)
+        serializer = CheckInSerializer(queryset, many=True)
         return Response(serializer.data)
 
     serializer = CheckInSerializer(checkin_data, many=True)

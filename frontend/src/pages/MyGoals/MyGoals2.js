@@ -8,23 +8,26 @@ const MyGoals2 = () => {
     const navigate = useNavigate();
     const [user, token] = useAuth();
     const [allHabits, setAllHabits] = useState([]);
-    const userHabits = useLocation();
+    const passedData = useLocation();
+    //These are objects
+    const userHabits = passedData.state;
+    //isChecked is just an array of names
     const [isChecked, setisChecked] = useState([]);
     const [newHabit, setNewHabit] = useState([]);
 
     
     useEffect (() => {
-        const fetchAllHabits = async () => {
-            try {
-                let response = await axios.get('http://127.0.0.1:8000/api/habits/all/');
-                setAllHabits(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchAllHabits()
+        fetchAllHabits();
     }, [])
 
+    const fetchAllHabits = async () => {
+        try {
+            let response = await axios.get('http://127.0.0.1:8000/api/habits/all/');
+            setAllHabits(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const handleCheck = (event) => {
         let value = event.target.value;
@@ -40,15 +43,24 @@ const MyGoals2 = () => {
     }
 
     const handleHabitSubmit = () => {
+        console.log(userHabits);
         addOrRemoveUserHabit().then( navigate('/mygoals'));
     }
 
     const addOrRemoveUserHabit = async () => {
         //if habit in isChecked and not in userHabits, put to userHabits
         for (let key in isChecked){
-            if (!userHabits.includes(isChecked[key])){
+            if (!Object.values(userHabits).includes(isChecked[key])){
                 try {
-                    await axios.put(`http://127.0.0.1:8000/api/habits/${isChecked[key].id}/`);
+                    //get the id from the habits table
+                    let selectHabit = allHabits.find(x => (x.name === isChecked[key]));
+                    await axios.put(`http://127.0.0.1:8000/api/habits/${selectHabit.id}/`,
+                        {
+                            headers: {
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
                     console.log(`Added ${isChecked[key]} to ${user.username} list`);
                 } catch (error) {
                     console.log(error);
@@ -57,10 +69,16 @@ const MyGoals2 = () => {
         }
         //if habit not in isChecked AND IN userHabits, delete from userHabits
         for (let key in userHabits){
-            if (!isChecked.includes(userHabits[key])){
+            if (!isChecked.includes(userHabits[key].name)){
                 try {
-                    await axios.delete(`http://127.0.0.1:8000/api/habits/${userHabits[key].id}/`);
-                    console.log(`Removed ${isChecked[key]} from ${user.username} list`);
+                    await axios.delete(`http://127.0.0.1:8000/api/habits/${userHabits[key].id}/`,
+                        {
+                            headers: {
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
+                    console.log(`Removed ${userHabits[key].name} from ${user.username} list`);
                 } catch (error) {
                     console.log(error);
                 }
@@ -85,8 +103,8 @@ const MyGoals2 = () => {
                         <label key={habit.id}>
                             <input
                                 type="checkbox"
-                                value={habit}
-                                onChange={handleCheck}
+                                value={habit.name}
+                                onChange={(event) => handleCheck(event)}
                             />
                             {habit.name}
                         </label>

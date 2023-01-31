@@ -43,6 +43,6 @@ def get_user_habit_data(request):
 def post_new_check_in(request):
     serializer = HabitFreqSerializer(data=request.data, partial=True)
     if serializer.is_valid():
-        serializer.save(user=request.user.id)
+        serializer.save(user=request.user)  #request.user here??
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
