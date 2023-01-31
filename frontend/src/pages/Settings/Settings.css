@@ -1,0 +1,26 @@
+.settings-page {
+    margin: 2rem;
+}
+
+.input-stuff {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.input-stuff select{
+    margin-left: 6px;
+}
+
+.toast-settings button {
+    min-width: 180px;
+}
+
+.magicbell-container {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top-style:solid;
+}
+
+.magicbell-container p {
+    font-size: 14px;
+}

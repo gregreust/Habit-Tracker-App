@@ -90,8 +90,14 @@ const MyGoals2 = () => {
         event.preventDefault();
         let newHabitObject = {
             name: newHabit
-        }
-        await axios.post('http://127.0.0.1:8000/api/habits/', newHabitObject)
+        };
+        await axios.post('http://127.0.0.1:8000/api/habits/', newHabitObject,
+            {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            },
+        ).then( navigate('/mygoals'));
     }
 
     return ( 
@@ -114,9 +120,9 @@ const MyGoals2 = () => {
             </form>
             <div className="add-custom-habit">
             <h4>Add a custom habit to the list</h4>
-            <form>
+            <form className="add-habit-form">
                 <input type="text" value={newHabit} onChange={(event) => setNewHabit(event.target.value)}/>
-                <button type="submit" onClick={(event) => handleAddNewHabit(event)}>Add habit</button>
+                <button className="add-habit-button" type="submit" onClick={(event) => handleAddNewHabit(event)}>Add habit</button>
             </form>
             </div>
         </div>
