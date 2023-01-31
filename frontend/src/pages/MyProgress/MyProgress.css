@@ -2,6 +2,10 @@
     margin: 2rem;
 }
 
+.progress-chart {
+    margin-bottom: 1rem;
+}
+
 .consistency-fetch button {
     min-width: 120px;
     margin-left: 2rem;

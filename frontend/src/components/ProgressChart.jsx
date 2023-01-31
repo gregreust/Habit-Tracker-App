@@ -10,6 +10,12 @@ const ProgressChart = () => {
     const [userCheckInData, setUserCheckInData] = useState([]); 
     const todayDate = new Date().toISOString().split('T')[0];
 
+    const options = {
+        legend: {position: "bottom"}, 
+        vAxis: {minValue: 5},
+        vAxis: {maxValue: 5},
+    };
+
     useEffect (() => {
         fetchUserCheckInData();
     }, [])
@@ -24,7 +30,6 @@ const ProgressChart = () => {
                 }
             );
             setUserCheckInData(response.data);
-            console.log(response.data);
             setDataBoolean(true);
         } catch (error) {
             //displays message if no data available yet
@@ -36,7 +41,6 @@ const ProgressChart = () => {
     const createCheckChartData = () => {
         let CHART_DATA = [];
         CHART_DATA.push(["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose"]);
-        console.log(CHART_DATA);
         
         for (let key in userCheckInData) {
             let newArr = Object.values(userCheckInData[key]);
@@ -61,10 +65,11 @@ const ProgressChart = () => {
     } else {
         return ( 
             <div className="progress-chart">
-                {/* ADD A WAY TO FILTER WHICH HABIT OR CHECKIN IS BEING DISPLAYED */}
+                {/* ADD A WAY TO FILTER WHICH HABIT OR CHECKIN IS BEING DISPLAYED? */}
                 <Chart
                     chartType="LineChart"
                     data={createCheckChartData()} 
+                    options={options}
                 />
             </div>
         );
