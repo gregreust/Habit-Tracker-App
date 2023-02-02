@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 import {toast} from 'react-toastify';
@@ -49,7 +49,7 @@ const MyGoals2 = () => {
     const handleHabitSubmit = (event) => {
         event.preventDefault();
         removeUserHabit();
-        toast.info(`Deleted`, {
+        toast.error(`Deleted`, {
             position: "top-center",
             autoClose: 4000,
             theme: "colored",
@@ -69,8 +69,9 @@ const MyGoals2 = () => {
                                 Authorization: "Bearer " + token,
                             },
                         }
-                    ).then(fetchHabits());
+                    );
                     console.log(`Removed ${habitObjects[key].name} from list`);
+                    setHabitsList(habitsList.filter(x => x.name !== habitObjects[key].name));
                 }
                 
             } catch (error) {
@@ -90,17 +91,22 @@ const MyGoals2 = () => {
                     Authorization: "Bearer " + token,
                 },
             },
-        ).then(fetchHabits());
+        );
+        setHabitsList([...habitsList, newHabitObject]);
+    }
+
+    function goBack () {
+        navigate('/');
     }
 
     return ( 
         <div className="my-goals-2">
             <div className="add-custom-habit">
-            <h4>Add a new habit to track</h4>
-            <form className="add-habit-form">
-                <input type="text" value={newHabit} onChange={(event) => setNewHabit(event.target.value)}/>
-                <button className="add-habit-button" type="submit" onClick={(event) => handleAddNewHabit(event)}>Add habit</button>
-            </form>
+                <h4>Add a new habit to track</h4>
+                <form className="add-habit-form">
+                    <input type="text" value={newHabit} onChange={(event) => setNewHabit(event.target.value)}/>
+                    <button className="add-habit-button" type="submit" onClick={(event) => handleAddNewHabit(event)}>Add habit</button>
+                </form>
             </div>
             {/* THIS WILL ONLY RENDER IF USER HAS ALREADY ADDED HABITS */}
             {habitsList && 
@@ -123,7 +129,9 @@ const MyGoals2 = () => {
                     </form>
                 </div>
             }
-            {/* <button className="done-button" onClick={navigate('/mygoals')}>Done</button> */}
+            <Link to="/">
+                <div className="go-back-button">Back to Menu</div>
+            </Link>
         </div>
     );
 }

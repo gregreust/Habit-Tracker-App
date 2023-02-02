@@ -28,6 +28,20 @@
     margin-left: 3rem;
 }
 
+.add-custom-habit {
+    padding: 1rem;
+    background-color: #D9D9D9;
+    width: 480px;
+}
+
+.add-habit-form input {
+    margin: 6px;
+    padding: 8px;
+    width: 200px;
+    font-size: 16px;
+    font-family: "Baloo Thambi", sans-serif; 
+}
+
 .my-goals-2 .habit-names {
     display:flex;
     flex-direction: column;
@@ -59,7 +73,7 @@
     box-shadow: #000000;
 }
 
-.my-goals-2 .habit-checklist {
+.my-goals-2 .delete-form{
     margin-top: 1rem;
     margin-bottom: 1rem;
     background-color: #D9D9D9;
@@ -75,7 +89,27 @@
     margin-top: 10px;
 }
 
-.my-goals-2 .checklist-submit-button button{
+.checklist-submit-button {
     background-color: #DA8D82;
+    text-align: right;
 }
 
+.go-back-button {
+    margin-top: 1rem;
+    background-color: #81d9b9;
+    color: black;
+    border-style: solid;
+    border-width: 2px;
+    font-size: 1rem;
+    font-family: inherit;
+    max-width: 120px;
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+    
+}
+
+.go-back-button:hover,
+       button:focus {
+        box-shadow: 0 0.5em 0.5em -0.4em rgb(109, 130, 131);
+        transform: translateY(-0.25em);
+      }

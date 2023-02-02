@@ -51,7 +51,6 @@ function App() {
 
   function handleResponse(reminderTimeResponse) {
     let reminderTime = reminderTimeResponse.toString();
-    console.log(reminderTime);
     //finds difference bewteen reminder time and now
     let timeDiff = findTimeDifference(reminderTime);
     //sets timer for above difference, then displays toast 
@@ -68,13 +67,11 @@ function App() {
     }
     //get difference from current time to reminder time in minutes
     let timeDiff = Math.abs((parseInt(reminderTimeHour) - nowDate.getHours()))*60 + Math.abs(parseInt(reminderTimeMin) - nowDate.getMinutes());
-    console.log(timeDiff);
     return timeDiff;
   }
 
   function toastTimer(timeDiffMinutes) {
     let timeDiffMillisecs = timeDiffMinutes * 60000;
-    console.log(timeDiffMillisecs);
     setTimeout(function () {
         //Display toast notification when time runs out
         toast.info("Time to fill out your daily check in!", {
