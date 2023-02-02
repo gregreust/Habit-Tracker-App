@@ -44,7 +44,7 @@ const MyGoals = () => {
                 </ul>
             </div>
 
-            <Link to="/goals2" state={userHabits}><button>Add or remove a <br/> habit to track</button></Link>
+            <Link to="/goals2" ><button>Add or remove a <br/> habit to track</button></Link>
 
         </div>
         
