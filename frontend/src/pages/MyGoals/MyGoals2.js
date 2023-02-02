@@ -16,7 +16,7 @@ const MyGoals2 = () => {
     
     useEffect (() => {
         fetchHabits();
-    }, [])
+    }, []);
 
     const fetchHabits = async () => {
         try {
@@ -63,15 +63,13 @@ const MyGoals2 = () => {
             console.log(habitObjects);
             try {
                 for (let key in habitObjects){
-                    await axios.delete(`http://127.0.0.1:8000/api/habits/${habitObjects[key].id}/`,
+                    await axios.delete(`http://127.0.0.1:8000/api/habits/delete/${habitObjects[key].id}/`,
                         {
                             headers: {
                                 Authorization: "Bearer " + token,
                             },
                         }
-                    );
-                    //reset habitsList instead of reloading page
-                    setHabitsList(prev => prev.filter(x => x.name !== isChecked[key]));
+                    ).then(fetchHabits());
                     console.log(`Removed ${habitObjects[key].name} from list`);
                 }
                 
@@ -79,8 +77,6 @@ const MyGoals2 = () => {
                 console.log(error);
             }
         }
-
-        
     }
 
     const handleAddNewHabit = async (event) => {
@@ -94,8 +90,7 @@ const MyGoals2 = () => {
                     Authorization: "Bearer " + token,
                 },
             },
-        );
-        setHabitsList([...habitsList, newHabit]);
+        ).then(fetchHabits());
     }
 
     return ( 
