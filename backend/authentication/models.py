@@ -11,5 +11,4 @@ class User(AbstractUser):
     This is useful for adding roles (Customer and Employee, for example)
     For just a few roles, adding boolean fields is advised
     '''
-    habits = models.ManyToManyField(Habits)
     reminder_time = models.IntegerField(null=True)

@@ -24,39 +24,15 @@ def get_all_habits(request):
 def user_habits(request):
     this_user = User.objects.get(username=request.user)
     if request.method == 'GET':
-
-        #this is a reverse m2m query copied from documentation
-        habits = get_list_or_404(Habits.objects.filter(user=this_user.id))
+        habits = get_list_or_404(user = this_user.id)
         serializer = HabitsSerializer(habits, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = HabitsSerializer(data=request.data, partial=True)
         if serializer.is_valid():
-            serializer.save()
-            #Adding the new habit to user's habits
-            this_user.habits.add(Habits.objects.latest('id'))
+            serializer.save(user=request.user.id)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-#add or remove habits from user's list (not from habits table)
-@api_view(['PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
-def add_or_remove_user_habit(request, habit_id):
-
-    this_user = User.objects.get(username=request.user)
-    habit = Habits.objects.get(id=habit_id)
-
-    if request.method == 'PUT':
-        this_user.habits.add(habit)
-        return Response(status=status.HTTP_202_ACCEPTED)
-
-    elif request.method == 'DELETE':
-        try:
-            this_user.habits.remove(habit)
-            return Response(status=status.HTTP_200_OK)
-        except:
-            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['DELETE'])
