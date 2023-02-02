@@ -20,7 +20,13 @@ const MyGoals2 = () => {
 
     const fetchHabits = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:8000/api/habits/');
+            let response = await axios.get('http://127.0.0.1:8000/api/habits/',
+                {
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                }
+            );
             setHabitsList(response.data);
         } catch (error) {
             console.log(error);
@@ -40,7 +46,8 @@ const MyGoals2 = () => {
         console.log(isChecked);
     }
 
-    const handleHabitSubmit = () => {
+    const handleHabitSubmit = (event) => {
+        event.preventDefault();
         removeUserHabit();
         toast.info(`Deleted`, {
             position: "top-center",
@@ -51,21 +58,29 @@ const MyGoals2 = () => {
 
     const removeUserHabit = async () => {
         for (let key in isChecked){
-            //grabs habit object from isChecked name
-            let habitObject = habitsList.filter(x => x.name === isChecked[key]);
+            //grabs habit object (OR multiple if they have the same name) from isChecked name
+            let habitObjects = habitsList.filter(x => x.name === isChecked[key]);
+            console.log(habitObjects);
             try {
-                await axios.delete(`http://127.0.0.1:8000/api/habits/${habitObject.id}/`,
-                    {
-                        headers: {
-                            Authorization: "Bearer " + token,
-                        },
-                    }
-                );
-                console.log(`Removed ${habitObject.name} from list`);
+                for (let key in habitObjects){
+                    await axios.delete(`http://127.0.0.1:8000/api/habits/${habitObjects[key].id}/`,
+                        {
+                            headers: {
+                                Authorization: "Bearer " + token,
+                            },
+                        }
+                    );
+                    //reset habitsList instead of reloading page
+                    setHabitsList(prev => prev.filter(x => x.name !== isChecked[key]));
+                    console.log(`Removed ${habitObjects[key].name} from list`);
+                }
+                
             } catch (error) {
                 console.log(error);
             }
         }
+
+        
     }
 
     const handleAddNewHabit = async (event) => {
@@ -80,6 +95,7 @@ const MyGoals2 = () => {
                 },
             },
         );
+        setHabitsList([...habitsList, newHabit]);
     }
 
     return ( 
@@ -112,7 +128,7 @@ const MyGoals2 = () => {
                     </form>
                 </div>
             }
-            <button className="done-button" onClick={navigate('/mygoals')}>Done</button>
+            {/* <button className="done-button" onClick={navigate('/mygoals')}>Done</button> */}
         </div>
     );
 }

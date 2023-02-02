@@ -24,13 +24,13 @@ def get_all_habits(request):
 def user_habits(request):
     this_user = User.objects.get(username=request.user)
     if request.method == 'GET':
-        habits = get_list_or_404(user = this_user.id)
+        habits = get_list_or_404(Habits, user = this_user)
         serializer = HabitsSerializer(habits, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = HabitsSerializer(data=request.data, partial=True)
         if serializer.is_valid():
-            serializer.save(user=request.user.id)
+            serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
