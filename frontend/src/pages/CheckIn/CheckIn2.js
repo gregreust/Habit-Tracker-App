@@ -20,12 +20,12 @@ const CheckIn2 = () => {
     const handleResponseSubmit = async () => {
         let new_check_in = {
             check_in_1: response1,
-            check_in_2: response1,
-            check_in_3: response1,
-            check_in_4: response1,
-            check_in_5: response1,
-            check_in_6: response1,
-            check_in_7: response1,
+            check_in_2: response2,
+            check_in_3: response3,
+            check_in_4: response4,
+            check_in_5: response5,
+            check_in_6: response6,
+            check_in_7: response7,
         }
         postData(new_check_in).then(setDataPosted(true));
     }

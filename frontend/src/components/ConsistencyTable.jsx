@@ -24,7 +24,6 @@ const ConsistencyTable = () => {
         );
         setHabitCount(() => countHabitNames(response.data));
         setDataBoolean(true);
-        console.log(habitCount);
     }
 
     //last40Days is the response from axios fetchData

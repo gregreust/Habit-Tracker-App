@@ -85,14 +85,14 @@ const MyGoals2 = () => {
         let newHabitObject = {
             name: newHabit,
         };
-        await axios.post('http://127.0.0.1:8000/api/habits/', newHabitObject,
+        let response = await axios.post('http://127.0.0.1:8000/api/habits/', newHabitObject,
             {
                 headers: {
                     Authorization: "Bearer " + token,
                 },
             },
         );
-        setHabitsList([...habitsList, newHabitObject]);
+        setHabitsList([...habitsList, response.data]);
     }
 
     function goBack () {

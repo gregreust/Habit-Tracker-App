@@ -43,6 +43,7 @@ const ProgressChart = () => {
         CHART_DATA.push(["Date", "Energy", "Stress", "Body Pain", "Sleep Quality", "Life Satisfaction", "Balance", "Purpose"]);
         
         for (let key in userCheckInData) {
+            console.log(userCheckInData[key]);
             let newArr = Object.values(userCheckInData[key]);
             //gets date and integers, NOT first 2 object values
             newArr.splice(0,2);
@@ -51,7 +52,6 @@ const ProgressChart = () => {
             CHART_DATA.push(...[newArr]);
         }
 
-        console.log(CHART_DATA);
         return CHART_DATA;
 
     }
