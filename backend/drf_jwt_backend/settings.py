@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'habit_frequency',
     'habits',
     'quotes',
+    'user_posts',
 ]
 
 MIDDLEWARE = [
