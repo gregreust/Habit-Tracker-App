@@ -1,4 +1,5 @@
 from django.db import models
+from authentication.models import User
 
 class UserPosts (models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)

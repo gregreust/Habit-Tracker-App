@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/checkin/', include('check_in_values.urls')),
     path('api/habitfreq/', include('habit_frequency.urls')),
     path('api/habits/', include('habits.urls')),
-    path('api/quotes/', include('quotes.urls'))
+    path('api/quotes/', include('quotes.urls')),
+    path('api/posts/', include('user_posts.urls')),
 ]
