@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from user_posts.models import UserPosts
 
 
 class User(AbstractUser):
@@ -11,3 +12,4 @@ class User(AbstractUser):
     For just a few roles, adding boolean fields is advised
     '''
     reminder_time = models.IntegerField(null=True)
+    liked_posts = models.ManyToManyField(UserPosts)

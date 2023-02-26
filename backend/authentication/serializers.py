@@ -31,7 +31,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         # If added new columns through the User model, add them in the fields
         # list as seen below
         fields = ('username', 'password', 'email',
-                  'first_name', 'last_name', 'reminder_time')
+                  'first_name', 'last_name', 'reminder_time', 'liked_posts')
         depth=1 #for access to user's habits
 
     def create(self, validated_data):
@@ -42,6 +42,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             reminder_time=validated_data['reminder_time'],
+            liked_posts=validated_data['liked_posts']
 
             # If added new columns through the User model, add them in this
             # create method.
@@ -55,4 +56,4 @@ class ReminderSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'password', 'email',
-                  'first_name', 'last_name', 'reminder_time']
+                  'first_name', 'last_name', 'reminder_time', 'liked_posts']
