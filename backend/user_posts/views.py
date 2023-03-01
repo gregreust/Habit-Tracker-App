@@ -26,7 +26,8 @@ def get_all_posts(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['PATCH', 'DELETE'])
+#LIKE & UNLIKE, DELETE, OR RETURN COUNT OF LIKES
+@api_view(['PATCH', 'DELETE', 'GET'])
 @permission_classes([IsAuthenticated()])
 def get_post_by_id(request, post_id): 
 
@@ -45,3 +46,6 @@ def get_post_by_id(request, post_id):
     elif request.method == 'DELETE':
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == 'GET':
+        return post.likes.count()
