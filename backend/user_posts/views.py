@@ -12,7 +12,7 @@ User = get_user_model()
 
 # GET ALL POSTS OR ADD NEW POST
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated()])
+@permission_classes([IsAuthenticated])
 def get_all_posts(request):
     if request.method == 'GET':
         posts = get_list_or_404(UserPosts)
@@ -28,7 +28,7 @@ def get_all_posts(request):
 
 #LIKE & UNLIKE, DELETE, OR RETURN COUNT OF LIKES
 @api_view(['PATCH', 'DELETE', 'GET'])
-@permission_classes([IsAuthenticated()])
+@permission_classes([IsAuthenticated])
 def get_post_by_id(request, post_id): 
 
     post = get_object_or_404(UserPosts, id=post_id)
@@ -37,11 +37,9 @@ def get_post_by_id(request, post_id):
         this_user = User.objects.get(id=request.user.id)
         #CHECK IF USER HAS LIKED THIS POST ALREADY
         if post in this_user.liked_posts:
-            this_user.liked_posts.remove(post)
-            post.likes -= 1
+            post.likes.remove(this_user)
         else:
-            this_user.liked_posts.add(post)
-            post.likes += 1
+            post.likes.add(this_user)
 
     elif request.method == 'DELETE':
         post.delete()

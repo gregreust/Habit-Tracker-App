@@ -56,3 +56,8 @@ class ReminderSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'password', 'email',
                   'first_name', 'last_name', 'reminder_time']
+
+#THIS IS ONLY FOR IMPORTING INTO USERPOSTS SERIALIZER
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
