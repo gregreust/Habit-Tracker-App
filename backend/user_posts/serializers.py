@@ -5,12 +5,14 @@ from authentication.serializers import UserSerializer
 
 
 class UserPostsSerializer(serializers.ModelSerializer):
+
+    extra_kwargs = {'user': {'read_only': True}}
+    likes = UserSerializer(read_only=True, many=True)
     class Meta:
         model = UserPosts
-        fields = ['id', 'user', 'user_id', 'text', 'likes', 'timestamp']
+        fields = ['id', 'user', 'text', 'likes', 'timestamp']
         depth = 1
 
-    user_id = serializers.IntegerField(write_only=True)
-    likes = UserSerializer(read_only=True, many=True)
+   
 
     #DO I NEED TO GET RID OF DEPTH TO PREVENT TOO MUCH DATA?????

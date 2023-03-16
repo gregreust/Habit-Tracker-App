@@ -21,8 +21,8 @@ def get_all_posts(request):
 
     elif request.method == 'POST':
         serializer = UserPostsSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user_id=request.user.id)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
