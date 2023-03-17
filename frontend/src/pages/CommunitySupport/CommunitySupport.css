@@ -1,0 +1,36 @@
+*{
+    font-size: 16px;
+}
+
+.create-post-container{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.post-feed{
+    display: flex;
+    justify-content: center;
+}
+
+.post {
+    border-style: solid;
+    border-radius: 20px;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    background-color: #D9D9D9;
+}
+
+.post-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.post-bottom{
+    display: flex;
+    justify-content: right;
+}

@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 import Post from '../../components/Post';
+import './CommunitySupport.css'
 
 const CommunitySupport = () => {
 

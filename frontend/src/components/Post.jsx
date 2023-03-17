@@ -58,14 +58,19 @@ const Post = ({postObject}) => {
         }
     }
       
-    
+
     if (time) {
         return ( 
             <div className='post'>
-                {postObject.user.username}
-                {postObject.text}
-                {postObject.likes}
-                {time}
+                <div className="post-top">
+                    <div>{postObject.user.username}</div>
+                    <div>{time}</div>
+                </div>
+                <div className="post-body">{postObject.text}</div>
+                <div className="post-bottom">
+                    {postObject.likes}
+                    <button>Like</button>
+                </div>
             </div>
         )}
     else {
