@@ -106,7 +106,7 @@ function App() {
         <Route path="/checkin" element={<CheckIn1/>}></Route>
         <Route path="/checkin2" element={<CheckIn2/>}></Route>
         <Route path="/myprogress" element={<MyProgress/>}></Route>
-        <Route path="/community" element={<CommunitySupport/>}></Route>
+        <Route path="/community" element={<CommunitySupport state={nowDate}/>}></Route>
         <Route path="/mygoals" element={<MyGoals/>}></Route>
         <Route path="/goals2" element={<MyGoals2/>}></Route>
         <Route path="/settings" element={<Settings/>}></Route>
