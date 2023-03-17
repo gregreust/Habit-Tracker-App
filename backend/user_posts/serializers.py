@@ -13,6 +13,6 @@ class UserPostsSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'text', 'likes', 'timestamp']
         depth = 1
 
-   
+
 
     #DO I NEED TO GET RID OF DEPTH TO PREVENT TOO MUCH DATA?????

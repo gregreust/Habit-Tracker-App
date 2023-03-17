@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
+import Post from '../../components/Post';
 
 const CommunitySupport = () => {
 
@@ -45,16 +46,13 @@ const CommunitySupport = () => {
                     <button type="submit" onClick={(e) => handlePost(e)}>Post</button>
                 </form>
             </div>
-            <div className="post-feed">
+            <ul className="post-feed">
                 {allPosts&&allPosts.map((post, index) => {
                     return (<li className="one-post" key={index}>
-                        {post.user.username}
-                        {post.text}
-                        {post.likes}
-                        {post.timestamp}
+                        <Post postObject={post}/>
                     </li>
                     )})}
-            </div>
+            </ul>
         </div>
      );
 
