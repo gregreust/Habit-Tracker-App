@@ -1,8 +1,14 @@
 import React, {useState, useEffect} from "react";
+import axios from "axios";
+import Heart from "react-heart";
+import useAuth from "../hooks/useAuth";
 
 const Post = ({postObject}) => {
 
+    const [user, token] = useAuth();
     const [time, setTime] = useState("");
+    const [isLiked, setIsLiked] = useState(false);
+    const [likeCount, setLikeCount] = useState();
 
     // const date = postObject.timestamp.substring(0,10);
     // const time = postObject.timestamp.substring(11,16);
@@ -11,6 +17,8 @@ const Post = ({postObject}) => {
     //elif post is more than 24 hrs old, show date 
     useEffect(() => {
         findTime(postObject.timestamp);
+        //check if user liked this post already 
+        //find like count 
     }, [])
 
     function findTime (timestamp) {
@@ -58,6 +66,17 @@ const Post = ({postObject}) => {
         }
     }
       
+    async function handleLike (e) {
+        e.preventDefault();
+        await axios.patch(`http://127.0.0.1:8000/api/posts/${postObject.id}/`, 
+            {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            }
+        );
+        setIsLiked(true);
+    }
 
     if (time) {
         return ( 
@@ -69,7 +88,7 @@ const Post = ({postObject}) => {
                 <div className="post-body">{postObject.text}</div>
                 <div className="post-bottom">
                     {postObject.likes}
-                    <button>Like</button>
+                    <Heart isActive={isLiked} onClick={(e) => handleLike(e)}/>
                 </div>
             </div>
         )}

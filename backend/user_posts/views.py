@@ -36,10 +36,11 @@ def get_post_by_id(request, post_id):
     if request.method == 'PATCH':
         this_user = User.objects.get(id=request.user.id)
         #CHECK IF USER HAS LIKED THIS POST ALREADY
-        if post in this_user.liked_posts:
+        if post.likes.contains(this_user):
             post.likes.remove(this_user)
         else:
             post.likes.add(this_user)
+        return Response(status=status.HTTP_200_OK)
 
     elif request.method == 'DELETE':
         post.delete()
