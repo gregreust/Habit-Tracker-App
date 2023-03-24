@@ -26,15 +26,15 @@ def get_all_posts(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-#LIKE & UNLIKE, DELETE, OR RETURN COUNT OF LIKES
+#LIKE & UNLIKE, DELETE, OR CHECK IF LOGGED IN USER HAS LIKED THIS POST (RETURN BOOL)
 @api_view(['PATCH', 'DELETE', 'GET'])
 @permission_classes([IsAuthenticated])
 def get_post_by_id(request, post_id): 
 
     post = get_object_or_404(UserPosts, id=post_id)
+    this_user = User.objects.get(id=request.user.id)
 
     if request.method == 'PATCH':
-        this_user = User.objects.get(id=request.user.id)
         #CHECK IF USER HAS LIKED THIS POST ALREADY
         if post.likes.contains(this_user):
             post.likes.remove(this_user)
@@ -47,4 +47,14 @@ def get_post_by_id(request, post_id):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'GET':
-        return post.likes.count()
+        if post.likes.contains(this_user):
+            return Response(True, status=status.HTTP_200_OK)
+        else:
+            return Response(False, status=status.HTTP_200_OK)
+
+#CHECK IF LOGGED IN USER HAS LIKED THIS POST (RETURN BOOL)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated()])
+def count_likes(request, post_id):
+    post = get_object_or_404(UserPosts, id=post_id)
+    return Response(post.likes.count(), status=status.HTTP_200_OK)

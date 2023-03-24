@@ -13,15 +13,17 @@ const Post = ({postObject}) => {
     // const date = postObject.timestamp.substring(0,10);
     // const time = postObject.timestamp.substring(11,16);
 
-    //if post is less than 24 hrs old, show hrs
-    //elif post is more than 24 hrs old, show date 
+    
     useEffect(() => {
         findTime(postObject.timestamp);
-        //check if user liked this post already 
-        //find like count 
+        checkIfLiked();
+        findLikeCount();
     }, [])
 
     function findTime (timestamp) {
+
+        //if post is less than 24 hrs old, show hrs
+        //if post is more than 24 hrs old, show date 
 
         const datetime = new Date(timestamp); // convert datetime string to a Date object
         const now = new Date(); // get the current datetime
@@ -65,7 +67,30 @@ const Post = ({postObject}) => {
             default: return 'th';
         }
     }
+
+    async function checkIfLiked () {
+        let response = await axios.get(`http://127.0.0.1:8000/api/posts/${postObject.id}/`, 
+        {
+            headers: {
+                Authorization: "Bearer " + token,
+            },
+        }
+        );
+        //should return bool 
+        setIsLiked(response.data);
+    }
       
+    async function findLikeCount () {
+        let response = await axios.get(`http://127.0.0.1:8000/api/posts/likes/${postObject.id}/`,
+            {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            }
+        );
+        setLikeCount(response.data);
+    }
+
     async function handleLike (e) {
         e.preventDefault();
         await axios.patch(`http://127.0.0.1:8000/api/posts/${postObject.id}/`, 
@@ -76,6 +101,7 @@ const Post = ({postObject}) => {
             }
         );
         setIsLiked(true);
+        setLikeCount(likeCount++);
     }
 
     if (time) {
@@ -88,7 +114,12 @@ const Post = ({postObject}) => {
                 <div className="post-body">{postObject.text}</div>
                 <div className="post-bottom">
                     {postObject.likes}
-                    <Heart isActive={isLiked} onClick={(e) => handleLike(e)}/>
+                    <Heart isActive={isLiked} 
+                        activeColor = "red" 
+                        inactiveColor = "grey" 
+                        animationTrigger = "hover" 
+                        animationScale = {1.5}
+                        onClick={(e) => handleLike(e)}/>
                 </div>
             </div>
         )}
