@@ -1,4 +1,4 @@
-*{
+.community-feed {
     font-size: 16px;
 }
 
@@ -34,3 +34,4 @@
     display: flex;
     justify-content: right;
 }
+

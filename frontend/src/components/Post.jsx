@@ -10,13 +10,9 @@ const Post = ({postObject}) => {
     const [isLiked, setIsLiked] = useState(false);
     const [likeCount, setLikeCount] = useState();
 
-    // const date = postObject.timestamp.substring(0,10);
-    // const time = postObject.timestamp.substring(11,16);
-
     
     useEffect(() => {
         findTime(postObject.timestamp);
-        checkIfLiked();
         findLikeCount();
     }, [])
 
@@ -67,18 +63,6 @@ const Post = ({postObject}) => {
             default: return 'th';
         }
     }
-
-    async function checkIfLiked () {
-        let response = await axios.get(`http://127.0.0.1:8000/api/posts/${postObject.id}/`, 
-        {
-            headers: {
-                Authorization: "Bearer " + token,
-            },
-        }
-        );
-        //should return bool 
-        setIsLiked(response.data);
-    }
       
     async function findLikeCount () {
         let response = await axios.get(`http://127.0.0.1:8000/api/posts/likes/${postObject.id}/`,
@@ -91,17 +75,21 @@ const Post = ({postObject}) => {
         setLikeCount(response.data);
     }
 
-    async function handleLike (e) {
-        e.preventDefault();
-        await axios.patch(`http://127.0.0.1:8000/api/posts/${postObject.id}/`, 
+    async function handleLike () {
+        if (isLiked === true) {
+            setIsLiked(false);
+            setLikeCount(likeCount - 1);
+        } else {
+            await axios.patch(`http://127.0.0.1:8000/api/posts/${postObject.id}/`, 
             {
                 headers: {
                     Authorization: "Bearer " + token,
                 },
             }
         );
-        setIsLiked(true);
-        setLikeCount(likeCount++);
+            setIsLiked(true);
+            setLikeCount(likeCount + 1);
+        }
     }
 
     if (time) {
@@ -113,13 +101,14 @@ const Post = ({postObject}) => {
                 </div>
                 <div className="post-body">{postObject.text}</div>
                 <div className="post-bottom">
-                    {postObject.likes}
-                    <Heart isActive={isLiked} 
-                        activeColor = "red" 
-                        inactiveColor = "grey" 
-                        animationTrigger = "hover" 
-                        animationScale = {1.5}
-                        onClick={(e) => handleLike(e)}/>
+                    {likeCount}
+                        <Heart isActive={isLiked}
+                            style={{ width: "1.5rem" }}
+                            activeColor = "red" 
+                            inactiveColor = "grey" 
+                            animationTrigger = "hover" 
+                            animationScale = {1.5}
+                            onClick={() => handleLike()}/>
                 </div>
             </div>
         )}
